@@ -1,0 +1,382 @@
+/* --------------- PARTIAL IMPORTS --------------- */
+@use "../../styles/partials/colors" as *;
+@use "../../styles/partials/breakpoints" as bp;
+@use "../../styles/partials/typography" as tp;
+@use "../../styles/partials/mixins" as mx;
+
+.home {
+  background-image: radial-gradient(rgba(24, 24, 24, 0.4) 1px, transparent 0);
+  background-size: 40px 40px;
+  background-position: -19px -36px;
+
+  @include mx.padding;
+  position: relative;
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+  }
+
+  &__subtitle {
+    font-weight: 700;
+    border-radius: 0.25rem;
+    border: 1px solid $primary-dark;
+    padding: 0.5rem 1rem;
+    margin: 4rem 0 1.5rem 0;
+
+    @include bp.small {
+      @include tp.small-auxiliary;
+    }
+    @include bp.medium {
+      @include tp.large-auxiliary;
+      font-size: 0.8125rem;
+    }
+    @include bp.large {
+      @include tp.large-auxiliary;
+      font-size: 0.8125rem;
+    }
+  }
+
+  &__title {
+    @include bp.small {
+      font-size: 3rem;
+      line-height: 3rem;
+      text-align: center;
+    }
+    @include bp.medium {
+      font-size: 3.5rem;
+      line-height: 3.5rem;
+      inline-size: 22rem;
+      text-align: center;
+    }
+    @include bp.large {
+      font-size: 3.5rem;
+      line-height: 3.5rem;
+      inline-size: 22rem;
+      text-align: center;
+    }
+    span {
+      @include mx.textAnimation;
+    }
+  }
+
+  &__feature {
+    &-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      @include bp.small {
+        @include tp.small-auxiliary;
+      }
+      @include bp.medium {
+        @include tp.large-auxiliary;
+        font-size: 1rem;
+      }
+      @include bp.large {
+        @include tp.large-auxiliary;
+        font-size: 1rem;
+      }
+    }
+    &-container {
+      margin-top: 2.5rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      column-gap: 0.5rem;
+      row-gap: 1rem;
+      @include bp.medium {
+        grid-template-columns: 1fr 1fr 1fr;
+        column-gap: 1.5rem;
+      }
+      @include bp.large {
+        grid-template-columns: 1fr 1fr 1fr;
+        column-gap: 1.5rem;
+      }
+    }
+  }
+
+  &__button {
+    @include mx.btn-primary;
+    padding: 0.9rem 3.5rem;
+    font-size: 1rem;
+    margin: 3.5rem 0 2rem 0;
+    &:hover {
+      @include mx.btn-primary-hover;
+      padding: 0.9rem 3.5rem;
+      font-size: 1rem;
+      margin: 3.5rem 0 2rem 0;
+    }
+  }
+
+  &__content {
+    text-align: center;
+  }
+
+  &__img {
+    margin-top: 2.5rem;
+    width: 30%;
+  }
+
+  &__illustration {
+    &__wrapper {
+      @include mx.border;
+      text-align: center;
+      margin-top: 1.5rem;
+      border-radius: 0.25rem;
+    }
+  }
+}
+
+.main {
+  @include mx.padding;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: radial-gradient(rgba(24, 24, 24, 0.4) 1px, transparent 0);
+  background-size: 40px 40px;
+  background-position: -19px -19px;
+  @include bp.medium {
+    padding-bottom: 3rem;
+  }
+  @include bp.large {
+    padding-bottom: 3rem;
+  }
+
+  &__title {
+    font-size: 3.5rem;
+    margin: 2.5rem 0;
+
+    span {
+      @include mx.textAnimation;
+    }
+  }
+
+  &__content {
+    &-card {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      justify-content: space-between;
+      gap: 3rem;
+      max-width: 65.9375rem;
+
+      @include bp.small {
+        flex-direction: column;
+      }
+      @include bp.small {
+        flex-direction: column;
+        margin-bottom: 2rem;
+      }
+
+      &__header,
+      &__description {
+        color: $primary-light;
+
+        span {
+          @include mx.textDecoration;
+        }
+      }
+
+      &__description {
+        margin: 1rem 0 3rem 0;
+        width: 85%;
+      }
+
+      &__button {
+        @include mx.btn-secondary;
+        width: 50%;
+        margin: 0 auto;
+        font-weight: 700;
+        font-size: 0.9375rem;
+      }
+
+      &__info {
+        background-color: $primary-dark;
+        height: 44vh;
+        width: 43vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        background-image: radial-gradient(
+          rgba(255, 255, 255, 0.2) 1px,
+          transparent 0
+        );
+        background-size: 40px 40px;
+        background-position: -19px -22px;
+        background-color: $primary-dark;
+
+        &--first {
+          border-radius: 0 1rem 1rem 0;
+        }
+
+        &--second {
+          border-radius: 1rem 0 0 1rem;
+        }
+
+        &--third {
+          border-radius: 0 1rem 1rem 0;
+        }
+      }
+    }
+  }
+}
+
+.feature {
+  @include mx.padding;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: radial-gradient(rgba(24, 24, 24, 0.4) 1px, transparent 0);
+  background-size: 40px 40px;
+  background-position: -19px -36px;
+  gap: 2rem;
+
+  &__header {
+    span {
+      @include mx.textAnimation;
+    }
+  }
+
+  &--top {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: $primary-dark;
+    height: 38.5rem;
+    border-radius: 0.25rem 10rem;
+    background-image: radial-gradient(
+      rgba(255, 255, 255, 0.2) 1px,
+      transparent 0
+    );
+    background-size: 40px 40px;
+    background-position: -19px -22px;
+    background-color: $primary-dark;
+  }
+
+  &__button {
+    @include mx.btn-secondary;
+    width: 50%;
+    margin: 0 auto;
+    font-weight: 700;
+    font-size: 0.9375rem;
+  }
+
+  &__title {
+    font-size: 2.5rem;
+    color: $primary-dark;
+    font-weight: 700;
+    margin-top: 3rem;
+    color: $primary-light;
+
+    span {
+      @include mx.textDecoration;
+    }
+  }
+
+  &__main {
+    &__description {
+      @include tp.large-auxiliary;
+      padding: 1rem 0;
+      text-align: center;
+      color: $primary-light;
+    }
+  }
+
+  &__container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    row-gap: 4rem;
+    margin-top: 3.5rem;
+    column-gap: 2rem;
+    padding-bottom: 3rem;
+    width: 80%;
+    min-height: 41rem;
+
+    @include bp.small {
+      grid-template-columns: 1fr;
+      row-gap: 4rem;
+    }
+  }
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    padding: 3rem;
+    background: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
+  &__description {
+    width: 80%;
+    margin-top: 9px;
+    font-size: 1.0625rem;
+  }
+}
+
+.join {
+  @include mx.padding;
+  background-image: radial-gradient(
+    rgba(255, 255, 255, 0.4) 1px,
+    transparent 0
+  );
+  background-size: 40px 40px;
+  background-position: -19px -22px;
+  background-color: $primary-dark;
+  height: 40vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+
+  &__title {
+    color: $primary-light;
+    margin-bottom: 3rem;
+    font-size: 3rem;
+
+    span {
+      @include mx.textDecoration;
+    }
+  }
+
+  &__form {
+    display: flex;
+  }
+
+  &__input {
+    padding: 1rem;
+    width: 25rem;
+    border-radius: 0.5rem 0 0 0.5rem;
+    border: 1px solid $primary-light;
+    height: 3.125rem;
+    font-size: 0.9375rem;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__button {
+    @include mx.btn-primary;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    border: 1px solid $primary-light;
+    height: 3.125rem;
+    border-radius: 0 0.5rem 0.5rem 0;
+    width: 6rem;
+    font-size: 0.9375rem;
+
+    &:hover {
+      background-color: #2a2828;
+    }
+  }
+}

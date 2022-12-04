@@ -1,0 +1,70 @@
+/* --------------- PARTIAL IMPORTS --------------- */
+@use "../../styles/partials/colors" as *;
+@use "../../styles/partials/breakpoints" as bp;
+@use "../../styles/partials/typography" as tp;
+@use "../../styles/partials/mixins" as mx;
+
+.team {
+  background-image: radial-gradient(rgba(24, 24, 24, 0.4) 1px, transparent 0);
+  background-size: 40px 40px;
+  background-position: -19px -36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 88vh;
+
+  &__title {
+    padding-top: 3rem;
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+
+    span {
+      @include mx.textAnimation;
+    }
+  }
+
+  &__member {
+    &-role {
+      color: $primary-semi-light;
+      @include tp.large-auxiliary;
+    }
+
+    &-socials {
+      display: flex;
+      gap: 1rem;
+    }
+
+    &-link {
+      color: $primary-semi-light;
+      font-weight: 700;
+      border-right: 1px solid rgba(24, 24, 24, 0.5);
+      padding-right: 1rem;
+
+      &:last-child {
+        border-right: 0;
+        padding-right: 0;
+      }
+    }
+
+    &-bio {
+      width: 30%;
+      text-align: center;
+      margin: 1.5rem 0;
+      font-size: 1.0625rem;
+    }
+    &-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &-img {
+      width: 8rem;
+      height: 8rem;
+      border-radius: 50%;
+      border: 0.25rem solid $primary-semi-light;
+    }
+  }
+}

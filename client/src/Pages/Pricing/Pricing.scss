@@ -1,0 +1,127 @@
+/* --------------- PARTIAL IMPORTS --------------- */
+@use "../../styles/partials/colors" as *;
+@use "../../styles/partials/breakpoints" as bp;
+@use "../../styles/partials/typography" as tp;
+@use "../../styles/partials/mixins" as mx;
+
+.pricing {
+  @include mx.padding;
+  background-image: radial-gradient(rgba(24, 24, 24, 0.4) 1px, transparent 0);
+  background-size: 40px 40px;
+  background-position: -19px -36px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  &__title {
+    margin-top: 3.5rem;
+    font-size: 3rem;
+
+    span {
+      @include mx.textAnimation;
+    }
+  }
+
+  &__cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-top: 4rem;
+  }
+
+  &__card {
+    padding: 2.5rem;
+    width: 26rem;
+    position: relative;
+    &:first-child,
+    &:last-child {
+      background: rgba(255, 255, 255, 0.5);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      border: 1px solid $primary-dark;
+    }
+
+    &:first-child {
+      border-radius: 2rem 0 0 2rem;
+    }
+
+    &:last-child {
+      border-radius: 0 2rem 2rem 0;
+    }
+
+    &-perk {
+      font-weight: 600;
+    }
+
+    &:nth-child(2) {
+      background-color: $primary-dark;
+      color: $primary-light;
+      background-image: radial-gradient(
+        rgba(255, 255, 255, 0.4) 1px,
+        transparent 0
+      );
+      background-size: 40px 40px;
+      background-position: -19px -36px;
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    &-popular {
+      background-color: $primary-semi-light;
+      padding: 0.5rem 1rem;
+      border-radius: 2rem;
+      position: absolute;
+      top: -1.5rem;
+      left: 9rem;
+      font-weight: 600;
+      @include mx.borderAnimation;
+    }
+
+    &-button {
+      @include mx.btn-primary;
+      width: 100%;
+      margin-top: 1rem;
+      padding: 0.7rem 1rem;
+
+      &:hover {
+        @include mx.btn-primary-hover;
+        padding: 0.7rem 1rem;
+        font-weight: 600;
+      }
+
+      &--second {
+        @include mx.btn-secondary;
+        padding: 0.7rem 1rem;
+
+        &:hover {
+          @include mx.borderAnimation;
+          border: 1px solid #ff1493;
+          padding: 0.7rem 1rem;
+        }
+      }
+    }
+
+    &-title {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+
+      &--second {
+        color: $primary-light;
+      }
+    }
+
+    &-price {
+      margin-bottom: 1.5rem;
+      &--second {
+        color: $primary-light;
+      }
+    }
+    &__perk {
+      &-container {
+        display: flex;
+        margin-bottom: 2rem;
+        gap: 1rem;
+      }
+    }
+  }
+}

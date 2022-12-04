@@ -1,0 +1,93 @@
+/* --------------- PARTIAL IMPORTS --------------- */
+@use "../../styles/partials/colors" as *;
+@use "../../styles/partials/breakpoints" as bp;
+@use "../../styles/partials/typography" as tp;
+@use "../../styles/partials/mixins" as mx;
+
+.contact {
+  background-image: radial-gradient(rgba(24, 24, 24, 0.4) 1px, transparent 0);
+  background-size: 40px 40px;
+  background-position: -19px -36px;
+  @include bp.small {
+    padding: 1rem;
+  }
+  @include bp.medium {
+    padding: 3rem;
+  }
+  @include bp.large {
+    padding: 5rem;
+  }
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 52rem;
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 2rem 2rem;
+    border: 1px solid $primary-dark;
+    border-radius: 0 3rem 3rem 0;
+    height: 30rem;
+  }
+
+  &--left {
+    background-color: $primary-dark;
+    background-image: radial-gradient(
+      rgba(255, 255, 255, 0.4) 1px,
+      transparent 0
+    );
+    background-size: 40px 40px;
+    background-position: -19px -36px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    border: 1px solid $primary-dark;
+    border-radius: 3rem 0 0 3rem;
+    display: flex;
+    height: 30rem;
+  }
+
+  &--right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  input {
+    padding: 0.75rem 1rem;
+    margin-bottom: 2rem;
+    border-radius: 0.25rem;
+    border: 1px solid $primary-dark;
+    font-size: 1rem;
+    ::placeholder {
+      font-weight: 400;
+    }
+  }
+
+  textarea {
+    margin-bottom: 2.5rem;
+    border-radius: 0.25rem;
+    border: 1px solid $primary-dark;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  label {
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+
+  &__button {
+    background-color: $primary-dark;
+    color: $primary-light;
+    font-weight: 600;
+    padding: 0.75rem;
+    border: 1px solid $primary-dark;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+}
