@@ -8,11 +8,8 @@
   background-image: radial-gradient(rgba(24, 24, 24, 0.4) 1px, transparent 0);
   background-size: 40px 40px;
   background-position: -19px -36px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 88vh;
+  min-height: 62vh;
+  text-align: center;
 
   &__title {
     padding-top: 3rem;
@@ -24,7 +21,17 @@
     }
   }
 
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
   &__member {
+    &-img {
+      flex-shrink: 0;
+    }
     &-role {
       color: $primary-semi-light;
       @include tp.large-auxiliary;
@@ -41,6 +48,10 @@
       border-right: 1px solid rgba(24, 24, 24, 0.5);
       padding-right: 1rem;
 
+      &:hover {
+        @include mx.textAnimation;
+      }
+
       &:last-child {
         border-right: 0;
         padding-right: 0;
@@ -48,7 +59,6 @@
     }
 
     &-bio {
-      width: 30%;
       text-align: center;
       margin: 1.5rem 0;
       font-size: 1.0625rem;
@@ -56,8 +66,22 @@
     &-card {
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
+      width: 32rem;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 8px 32px 0 rgb(31 38 135 / 37%);
+      border: 1px solid $primary-semi-light;
+      overflow: hidden;
+      max-height: 15rem;
+      transition: 0.7s ease;
+
+      &:hover {
+        @include mx.borderAnimation;
+        border-width: 2px;
+        max-height: 30rem;
+        box-shadow: 0 8px 32px 0 rgb(31 38 135 / 70%);
+      }
     }
 
     &-img {
