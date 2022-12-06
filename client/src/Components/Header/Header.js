@@ -1,7 +1,7 @@
 /* < ------------ SCSS IMPORTS ------------> */
 import "./Header.scss";
 /* < ------------ REACT IMPORTS ------------> */
-import { NavLink, Link, useNavigate } from "react-router-dom";
+import { NavLink, Link, useNavigate, useLocation } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { AiOutlineClose } from "react-icons/ai";
 import { BsCircleFill } from "react-icons/bs";
@@ -12,6 +12,7 @@ const Header = () => {
   const menuToggler = () => setMenuOpen((p) => !p);
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   const toLoginPage = () => {
     navigate("/login");

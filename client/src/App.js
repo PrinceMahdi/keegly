@@ -16,16 +16,38 @@ const App = () => {
   return (
     <>
       <BrowserRouter>
-        <Header />
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route
+            path="/"
+            element={[
+              <Header key={1} />,
+              <HomePage key={2} />,
+              <Footer key={3} />,
+            ]}
+          />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/team" element={<Team />} />
-          <Route path="/pricing" element={<Pricing />} />
-          <Route path="/contact" element={<Contact />} />
+          <Route
+            path="/team"
+            element={[<Header key={1} />, <Team key={2} />, <Footer key={3} />]}
+          />
+          <Route
+            path="/pricing"
+            element={[
+              <Header key={1} />,
+              <Pricing key={2} />,
+              <Footer key={3} />,
+            ]}
+          />
+          <Route
+            path="/contact"
+            element={[
+              <Header key={1} />,
+              <Contact key={2} />,
+              <Footer key={3} />,
+            ]}
+          />
         </Routes>
-        <Footer />
       </BrowserRouter>
     </>
   );
