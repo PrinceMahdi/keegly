@@ -3,8 +3,10 @@ import "./Pricing.scss";
 /* --------------- ASSET IMPORTS --------------- */
 import { AiFillCheckCircle } from "react-icons/ai";
 import { AiFillCloseCircle } from "react-icons/ai";
+/* --------------- REACT IMPORTS --------------- */
+import { Link } from "react-router-dom";
 
-const Pricing = () => {
+const Pricing = ({ user }) => {
   return (
     <>
       <section className="pricing">
@@ -33,7 +35,9 @@ const Pricing = () => {
                 <li className="pricing__card-perk">Unlimited upload</li>
               </div>
             </ul>
-            <button className="pricing__card-button">Get Started</button>
+            <Link to={user ? "/profile" : "/login"}>
+              <button className="pricing__card-button">Get Started</button>
+            </Link>
           </div>
           <div className="pricing__card">
             <span className="pricing__card-popular">Most Popular</span>
@@ -61,9 +65,11 @@ const Pricing = () => {
                 <li className="pricing__card-perk">Unlimited upload</li>
               </div>
             </ul>
-            <button className="pricing__card-button pricing__card-button--second">
-              Get Started
-            </button>
+            <Link to={user ? "/profile" : "/login"}>
+              <button className="pricing__card-button pricing__card-button--second">
+                Get Started
+              </button>
+            </Link>
           </div>
           <div className="pricing__card">
             <h3 className="pricing__card-title">Keegly Bracelet</h3>
@@ -86,7 +92,9 @@ const Pricing = () => {
                 <li className="pricing__card-perk">Unlimited upload</li>
               </div>
             </ul>
-            <button className="pricing__card-button">Get Started</button>
+            <Link to={user ? "/profile" : "/login"}>
+              <button className="pricing__card-button">Get Started</button>
+            </Link>
           </div>
         </div>
       </section>

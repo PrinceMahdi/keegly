@@ -5,6 +5,7 @@ const path = require("node:path");
 const cookieSession = require("cookie-session");
 const passportSetup = require("./passport");
 const passport = require("passport");
+const authRoute = require("./routes/auth");
 
 // <------------------- INITIALIZE THE EXPRESS SERVER ------------------->
 const app = express();
@@ -12,23 +13,8 @@ const app = express();
 // <-------------------- FOR .env FILES -------------------->
 require("dotenv").config();
 
-// <-------------------- ROUTES IMPORTS -------------------->
-// const videoRouter = require("./routes/videos");
-
 // <-------------------- MIDDLEWARE -------------------->
 app.use(express.json());
-
-// <-------------------- SERVING ALL STATIC FILES -------------------->
-// app.use(express.static(path.join(__dirname, "public")));
-
-// <-------------------- SERVING STATIC RESOURCES TO CLIENT -------------------->
-// app.get("/", (_req, res) => {
-//   res.sendFile(path.join(__dirname, "public", "index.html"));
-// });
-
-// <-------------------- ROUTES -------------------->
-// Videos Route
-// app.use("/videos", videoRouter);
 
 app.use(
   cookieSession({
@@ -47,6 +33,8 @@ app.use(
     credentials: true,
   })
 );
+
+app.use("/auth", authRoute);
 
 // <-------------------- SERVER LISTENING FOR CHANGES -------------------->
 const PORT = process.env.PORT || 8080;

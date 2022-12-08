@@ -10,16 +10,17 @@ passport.use(
     {
       clientID: GOOGLE_CLIENT_ID,
       clientSecret: GOOGLE_CLIENT_SECRET,
-      callbackURL: "http://www.example.com/auth/google/callback",
+      callbackURL: "/auth/google/callback",
     },
     function (accessToken, refreshToken, profile, done) {
-      const user = {
-        id: profile.id,
-        name: profile.displayName,
-        email: profile.emails[0].value,
-        image: profile.photos[0].value,
-      };
-      return done(null, user);
+      done(null, profile);
+      // const user = {
+      //   id: profile.id,
+      //   name: profile.displayName,
+      //   email: profile.emails[0].value,
+      //   image: profile.photos[0].value,
+      // };
+      // return done(null, user);
     }
   )
 );

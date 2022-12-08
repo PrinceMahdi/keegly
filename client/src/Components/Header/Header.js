@@ -21,6 +21,11 @@ const Header = ({ user }) => {
   const toSignUpPage = () => {
     navigate("/signup");
   };
+
+  const logout = () => {
+    window.open("http://localhost:8080/auth/logout", "_self");
+  };
+
   return (
     <header className="header">
       <div className="header__content">
@@ -91,16 +96,18 @@ const Header = ({ user }) => {
             menuOpen ? "header__cta-container--open" : {}
           }`}
         >
-          {/* if user is true then render an image, a name, and a logout button if not then render the login and sign up buttons */}
           {user ? (
             <>
               <img
-                src={Mahdi}
+                src={user.photos[0].value}
                 alt="profile"
                 className="header__profile-picture"
+                referrerPolicy="no-referrer"
               />
-              <span className="header__name">Mahdi</span>
-              <button className="header__button">Logout</button>
+              <span className="header__name">{`${user.name.givenName}`}</span>
+              <button className="header__button" onClick={logout}>
+                Logout
+              </button>
             </>
           ) : (
             <>
