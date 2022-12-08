@@ -8,7 +8,7 @@ import { BsGithub } from "react-icons/bs";
 import { BsYoutube } from "react-icons/bs";
 import { BsTwitter } from "react-icons/bs";
 
-const Footer = () => {
+const Footer = ({ user }) => {
   return (
     <>
       <footer className="footer">
@@ -29,12 +29,18 @@ const Footer = () => {
             <Link to={"/contact"}>
               <li className="footer__nav-item">Contact</li>
             </Link>
-            <Link to={"/login"}>
-              <li className="footer__nav-item">Login</li>
-            </Link>
-            <Link to={"/signup"}>
-              <li className="footer__nav-item">Sign Up</li>
-            </Link>
+            {user ? (
+              ""
+            ) : (
+              <>
+                <Link to={"/login"}>
+                  <li className="footer__nav-item">Login</li>
+                </Link>
+                <Link to={"/signup"}>
+                  <li className="footer__nav-item">Sign Up</li>
+                </Link>
+              </>
+            )}
           </ul>
         </nav>
         <div className="footer--bottom">

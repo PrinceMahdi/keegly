@@ -6,13 +6,19 @@ import "./Login.scss";
 import loginImg from "../../assets/illustrations/Travels.svg";
 
 const Login = () => {
+  const google = () => {
+    window.open("http://localhost:8080/auth/google", "_self");
+  };
+
   return (
     <>
       <section className="login">
         <div className="login--left">
           <h1 className="login__title">Login</h1>
           <h3 className="login__subtitle">Please enter your details.</h3>
-          <button className="login__button-google">Login with Google</button>
+          <button className="login__button-google" onClick={google}>
+            Login with Google
+          </button>
           <div className="login__divider">
             <div className="login__divider__line"></div>
             <div className="login__divider__or">or</div>

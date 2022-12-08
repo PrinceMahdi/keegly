@@ -42,9 +42,11 @@ p {
   color: $primary-dark;
 }
 
-::placeholder,
-button {
-  font-family: "Titillium";
+button,
+textarea,
+select,
+input {
+  font-family: inherit;
   color: $primary-dark;
 }
 
@@ -53,6 +55,5 @@ button {
 }
 
 textarea {
-  font-family: "Titillium";
   resize: none;
 }

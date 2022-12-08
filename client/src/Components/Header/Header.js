@@ -6,8 +6,9 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { AiOutlineClose } from "react-icons/ai";
 import { BsCircleFill } from "react-icons/bs";
 import { useState } from "react";
+import Mahdi from "../../assets/team/Screen Shot 2022-10-24 at 1.41.10 PM copy.png";
 
-const Header = () => {
+const Header = ({ user }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuToggler = () => setMenuOpen((p) => !p);
 
@@ -20,6 +21,11 @@ const Header = () => {
   const toSignUpPage = () => {
     navigate("/signup");
   };
+
+  const logout = () => {
+    window.open("http://localhost:8080/auth/logout", "_self");
+  };
+
   return (
     <header className="header">
       <div className="header__content">
@@ -90,12 +96,29 @@ const Header = () => {
             menuOpen ? "header__cta-container--open" : {}
           }`}
         >
-          <button className="header__button" onClick={toLoginPage}>
-            Login
-          </button>
-          <button className="header__button" onClick={toSignUpPage}>
-            Sign up
-          </button>
+          {user ? (
+            <>
+              <img
+                src={user.photos[0].value}
+                alt="profile"
+                className="header__profile-picture"
+                referrerPolicy="no-referrer"
+              />
+              <span className="header__name">{`${user.name.givenName}`}</span>
+              <button className="header__button" onClick={logout}>
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <button className="header__button" onClick={toLoginPage}>
+                Login
+              </button>
+              <button className="header__button" onClick={toSignUpPage}>
+                Sign up
+              </button>
+            </>
+          )}
         </div>
       </div>
     </header>

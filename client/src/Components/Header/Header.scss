@@ -11,6 +11,19 @@
     position: relative;
   }
 
+  &__name {
+    font-weight: 600;
+    margin-right: 1.5rem;
+  }
+
+  &__profile {
+    &-picture {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+    }
+  }
+
   &__hamburger {
     &-icon {
       position: absolute;
@@ -94,6 +107,7 @@
     &-item {
       letter-spacing: 0.0625rem;
       width: 4rem;
+      font-weight: 300;
       &:hover {
         @include mx.textAnimation;
       }
@@ -122,6 +136,7 @@
     &-container {
       display: flex;
       gap: 1rem;
+      align-items: center;
 
       @include bp.small {
         gap: 1rem;
