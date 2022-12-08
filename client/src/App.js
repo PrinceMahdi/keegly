@@ -13,6 +13,8 @@ import Pricing from "./Pages/Pricing/Pricing";
 import Contact from "./Pages/Contact/Contact";
 
 const App = () => {
+  const user = false;
+
   return (
     <>
       <BrowserRouter>
@@ -20,8 +22,8 @@ const App = () => {
           <Route
             path="/"
             element={[
-              <Header key={1} />,
-              <HomePage key={2} />,
+              <Header key={1} user={user} />,
+              <HomePage key={2} user={user} />,
               <Footer key={3} />,
             ]}
           />
@@ -29,12 +31,16 @@ const App = () => {
           <Route path="/signup" element={<SignUp />} />
           <Route
             path="/team"
-            element={[<Header key={1} />, <Team key={2} />, <Footer key={3} />]}
+            element={[
+              <Header key={1} user={user} />,
+              <Team key={2} />,
+              <Footer key={3} />,
+            ]}
           />
           <Route
             path="/pricing"
             element={[
-              <Header key={1} />,
+              <Header key={1} user={user} />,
               <Pricing key={2} />,
               <Footer key={3} />,
             ]}
@@ -42,7 +48,7 @@ const App = () => {
           <Route
             path="/contact"
             element={[
-              <Header key={1} />,
+              <Header key={1} user={user} />,
               <Contact key={2} />,
               <Footer key={3} />,
             ]}

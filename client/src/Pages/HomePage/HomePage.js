@@ -11,7 +11,7 @@ import { BsCircleFill } from "react-icons/bs";
 import { CiCircleCheck } from "react-icons/ci";
 import { Link } from "react-router-dom";
 
-const HomePage = () => {
+const HomePage = ({ user }) => {
   return (
     <>
       <section className="home">
@@ -54,7 +54,7 @@ const HomePage = () => {
             <div className="home__illustrations">
               <div className="home__illustrations-card"></div>
             </div>
-            <Link to={"/login"}>
+            <Link to={user ? "/profile" : "/login"}>
               <button className="home__button">Get Started Now</button>
             </Link>
           </div>
@@ -82,7 +82,9 @@ const HomePage = () => {
                 digital portfolio for yourself which you can then share with
                 recruiters and other people.
               </p>
-              <button className="main__content-card__button">Explore</button>
+              <Link to={user ? "/profile" : "/login"}>
+                <button className="main__content-card__button">Explore</button>
+              </Link>
             </div>
           </div>
           <div className="main__content-card">
@@ -95,7 +97,9 @@ const HomePage = () => {
                 the option to connect your profile to cards, bracelets,
                 stickers, or rings. You can then simply tap away!
               </p>
-              <button className="main__content-card__button">Explore</button>
+              <Link to={user ? "/profile" : "/login"}>
+                <button className="main__content-card__button">Explore</button>
+              </Link>
             </div>
             <img
               src={illustration_one}
@@ -119,7 +123,9 @@ const HomePage = () => {
                 in smartphones. Simply tap your card to the back of phones and
                 your profile can be shared with others!
               </p>
-              <button className="main__content-card__button">Explore</button>
+              <Link to={user ? "/profile" : "/login"}>
+                <button className="main__content-card__button">Explore</button>
+              </Link>
             </div>
           </div>
         </div>
@@ -133,7 +139,9 @@ const HomePage = () => {
             Keegly's features were tailor-made to help you meet more people in
             less time.
           </p>
-          <button className="feature__button">Explore</button>
+          <Link to={user ? "/profile" : "/login"}>
+            <button className="feature__button">Explore</button>
+          </Link>
         </div>
 
         <div className="feature__container">

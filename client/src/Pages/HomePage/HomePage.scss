@@ -203,10 +203,14 @@
 
       &__button {
         @include mx.btn-secondary;
-        width: 50%;
+        width: 20rem;
         margin: 0 auto;
         font-weight: 700;
         font-size: 0.9375rem;
+        &:hover {
+          @include mx.borderAnimation;
+          border-width: 1px;
+        }
       }
 
       &__info {
@@ -276,10 +280,14 @@
 
   &__button {
     @include mx.btn-secondary;
-    width: 50%;
+    width: 20rem;
     margin: 0 auto;
     font-weight: 700;
     font-size: 0.9375rem;
+    &:hover {
+      @include mx.borderAnimation;
+      border-width: 1px;
+    }
   }
 
   &__title {
@@ -297,9 +305,10 @@
   &__main {
     &__description {
       @include tp.large-auxiliary;
-      padding: 1rem 0;
+      padding: 1rem 0 3rem 0;
       text-align: center;
       color: $primary-light;
+      width: 90%;
     }
   }
 
