@@ -6,6 +6,7 @@ const cookieSession = require("cookie-session");
 const passportSetup = require("./passport");
 const passport = require("passport");
 const authRoute = require("./routes/auth");
+const usersRoute = require("./routes/users");
 
 // <------------------- INITIALIZE THE EXPRESS SERVER ------------------->
 const app = express();
@@ -15,6 +16,12 @@ require("dotenv").config();
 
 // <-------------------- MIDDLEWARE -------------------->
 app.use(express.json());
+
+app.use(express.static(path.join(__dirname, "public")));
+
+app.get("/", (_req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
 
 app.use(
   cookieSession({
@@ -35,6 +42,7 @@ app.use(
 );
 
 app.use("/auth", authRoute);
+app.use("/users", usersRoute);
 
 // <-------------------- SERVER LISTENING FOR CHANGES -------------------->
 const PORT = process.env.PORT || 8080;

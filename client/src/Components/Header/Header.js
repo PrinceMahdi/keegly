@@ -5,11 +5,13 @@ import { NavLink, Link, useNavigate, useLocation } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { AiOutlineClose } from "react-icons/ai";
 import { BsCircleFill } from "react-icons/bs";
-import { useState } from "react";
-import Mahdi from "../../assets/team/Screen Shot 2022-10-24 at 1.41.10 PM copy.png";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const Header = ({ user }) => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [userData, setUserData] = useState(null);
+
   const menuToggler = () => setMenuOpen((p) => !p);
 
   const navigate = useNavigate();
@@ -25,6 +27,20 @@ const Header = ({ user }) => {
   const logout = () => {
     window.open("http://localhost:8080/auth/logout", "_self");
   };
+
+  useEffect(() => {
+    const getUserData = async () => {
+      try {
+        const { data } = await axios.get("http://localhost:8080/users");
+        setUserData(data);
+      } catch (error) {
+        console.log("::: There was an error: ", error);
+      }
+    };
+    getUserData();
+  }, []);
+
+  console.log(userData);
 
   return (
     <header className="header">
@@ -104,7 +120,15 @@ const Header = ({ user }) => {
                 className="header__profile-picture"
                 referrerPolicy="no-referrer"
               />
-              <span className="header__name">{`${user.name.givenName}`}</span>
+              {userData?.map((singleUser) => {
+                if (user.photos[0].value === singleUser.photo) {
+                  return (
+                    <Link to={`/me/${singleUser.uniqueId}`}>
+                      <span className="header__name">{`${user.name.givenName}`}</span>
+                    </Link>
+                  );
+                }
+              })}
               <button className="header__button" onClick={logout}>
                 Logout
               </button>

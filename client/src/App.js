@@ -11,6 +11,7 @@ import Footer from "./Components/Footer/Footer";
 import Team from "./Pages/Team/Team";
 import Pricing from "./Pages/Pricing/Pricing";
 import Contact from "./Pages/Contact/Contact";
+import Profile from "./Pages/Profile/Profile";
 import { useEffect, useState } from "react";
 
 const App = () => {
@@ -47,17 +48,18 @@ const App = () => {
           <Route
             path="/"
             element={[
-              <Header key={1} user={user} />,
+              <Header key={1} user={user}/>,
               <HomePage key={2} user={user} />,
               <Footer key={3} user={user} />,
             ]}
           />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/me/:id" element={<Profile />} />
           <Route
             path="/team"
             element={[
-              <Header key={1} user={user} />,
+              <Header key={1} user={user}/>,
               <Team key={2} />,
               <Footer key={3} user={user} />,
             ]}
@@ -65,7 +67,7 @@ const App = () => {
           <Route
             path="/pricing"
             element={[
-              <Header key={1} user={user} />,
+              <Header key={1} user={user}/>,
               <Pricing key={2} user={user} />,
               <Footer key={3} user={user} />,
             ]}
@@ -73,7 +75,7 @@ const App = () => {
           <Route
             path="/contact"
             element={[
-              <Header key={1} user={user} />,
+              <Header key={1} user={user}/>,
               <Contact key={2} />,
               <Footer key={3} user={user} />,
             ]}
