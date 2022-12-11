@@ -3,3 +3,175 @@
 @use "../../styles/partials/breakpoints" as bp;
 @use "../../styles/partials/typography" as tp;
 @use "../../styles/partials/mixins" as mx;
+
+.profile__file--upload input[type="file"],
+.profile__banner__file--upload input[type="file"] {
+  display: none;
+}
+
+.profile__form input:invalid {
+  border-bottom: 2.5px solid $form-error;
+}
+.profile__form input:valid {
+  border-bottom: 2.5px solid $form-validation;
+}
+
+.profile__form textarea:invalid {
+  border: 2.5px solid $form-error;
+}
+.profile__form textarea:valid {
+  border: 2.5px solid $form-validation;
+}
+
+.profile {
+  display: flex;
+
+  &__preview {
+    &-banner {
+      width: 100%;
+      height: 20rem;
+      border-radius: 0.5rem;
+      object-fit: cover;
+
+      &__container {
+        width: 44rem;
+        position: relative;
+      }
+    }
+
+    &-picture {
+      width: 10rem;
+      height: 10rem;
+      border-radius: 50%;
+      object-fit: cover;
+      position: absolute;
+      margin: auto;
+      left: 0;
+      right: 0;
+      bottom: -3rem;
+    }
+
+    &-info {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  &--right {
+    @include bp.small {
+      padding: 1rem;
+    }
+    @include bp.medium {
+      padding: 1rem 3rem 3rem 3rem;
+    }
+    @include bp.large {
+      padding: 3rem 5rem 5rem 5rem;
+    }
+  }
+
+  &--left {
+    @include mx.padding;
+    border-right: 1px solid $primary-dark;
+    height: 100vh;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &__title {
+      font-size: 3rem;
+      font-weight: 600;
+      padding: 2rem 0 2.5rem 0;
+
+      span {
+        @include mx.textAnimation;
+      }
+    }
+  }
+
+  &__banner {
+    &__picture {
+      &-label {
+        cursor: pointer;
+      }
+    }
+  }
+
+  &__picture {
+    &-label {
+      cursor: pointer;
+    }
+  }
+
+  &__form {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 1rem;
+    row-gap: 2rem;
+  }
+
+  &__banner {
+    &__file {
+      &--upload {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0.5rem 1rem;
+        color: $primary-light;
+        background-color: $primary-dark;
+        border-radius: 0.25rem;
+        border: 1px solid rgba(24, 24, 24, 0.3);
+        margin-right: 2rem;
+        height: 3rem;
+      }
+    }
+  }
+
+  &__file {
+    &--upload {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0.5rem 1rem;
+      color: $primary-light;
+      background-color: $primary-dark;
+      border-radius: 0.25rem;
+      border: 1px solid rgba(24, 24, 24, 0.3);
+      margin-right: 2rem;
+      height: 3rem;
+    }
+  }
+
+  input {
+    border: none;
+    border: 1px solid rgba(24, 24, 24, 0.3);
+    border-radius: 0.25rem;
+    padding: 0.5rem 1rem 1rem 1rem;
+    margin-bottom: 2rem;
+    font-size: 0.9375rem;
+    margin-right: 1.5rem;
+
+    &:focus {
+      outline: none;
+      border-bottom: 2.5px solid $primary-dark;
+    }
+
+    &::placeholder {
+      color: rgba(24, 24, 24, 0.5);
+    }
+  }
+
+  textarea {
+    font-size: 0.9375rem;
+    height: 5rem;
+    border: 1px solid rgba(24, 24, 24, 0.3);
+    border-radius: 0.25rem;
+    padding: 0.5rem 1rem 1rem 1rem;
+
+    &:focus {
+      border: 1.25px solid $primary-dark;
+      outline: 1.25px solid $primary-dark;
+      //   border-radius: 0.25rem;
+    }
+  }
+}

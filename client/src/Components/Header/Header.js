@@ -7,10 +7,10 @@ import { AiOutlineClose } from "react-icons/ai";
 import { BsCircleFill } from "react-icons/bs";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { v4 as uuidv4 } from "uuid";
 
-const Header = ({ user }) => {
+const Header = ({ user, userData }) => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [userData, setUserData] = useState(null);
 
   const menuToggler = () => setMenuOpen((p) => !p);
 
@@ -27,20 +27,6 @@ const Header = ({ user }) => {
   const logout = () => {
     window.open("http://localhost:8080/auth/logout", "_self");
   };
-
-  useEffect(() => {
-    const getUserData = async () => {
-      try {
-        const { data } = await axios.get("http://localhost:8080/users");
-        setUserData(data);
-      } catch (error) {
-        console.log("::: There was an error: ", error);
-      }
-    };
-    getUserData();
-  }, []);
-
-  console.log(userData);
 
   return (
     <header className="header">
@@ -123,7 +109,7 @@ const Header = ({ user }) => {
               {userData?.map((singleUser) => {
                 if (user.photos[0].value === singleUser.photo) {
                   return (
-                    <Link to={`/me/${singleUser.uniqueId}`}>
+                    <Link to={`/me/${singleUser.uniqueId}`} key={uuidv4()}>
                       <span className="header__name">{`${user.name.givenName}`}</span>
                     </Link>
                   );
