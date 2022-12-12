@@ -1,8 +1,13 @@
 import "./Profile.scss";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { BsDot } from "react-icons/bs";
+import linkedIn from "../../assets/icons/linkedin.svg";
+import instagram from "../../assets/icons/instagram.svg";
+import github from "../../assets/icons/github.svg";
+import Multiselect from "multiselect-react-dropdown";
 
-const Profile = ({ user, userData }) => {
+const Profile = ({ userData }) => {
   const params = useParams();
 
   const [profileBanner, setProfileBanner] = useState(
@@ -35,6 +40,7 @@ const Profile = ({ user, userData }) => {
   const [profileBio, setProfileBio] = useState(
     localStorage.getItem("profileBio") || ""
   );
+  const [selectedSkills, setSelectedSkills] = useState([]);
 
   useEffect(() => {
     localStorage.setItem("profileBanner", profileBanner);
@@ -75,6 +81,33 @@ const Profile = ({ user, userData }) => {
       setProfileBanner(reader.result);
     };
     reader.readAsDataURL(file);
+  };
+
+  const skills = [
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "React",
+    "Node.js",
+    "Express",
+    "MongoDB",
+    //...
+  ];
+
+  const handleChange = (event) => {
+    // Get the selected options from the event
+    const options = event.target.options;
+
+    // Create an array of the selected skills
+    const selectedOptions = [];
+    for (let i = 0; i < options.length; i++) {
+      if (options[i].selected) {
+        selectedOptions.push(options[i].value);
+      }
+    }
+
+    // Update the state with the selected skills
+    setSelectedSkills(selectedOptions);
   };
 
   return (
@@ -121,72 +154,100 @@ const Profile = ({ user, userData }) => {
                         Upload Picture
                       </label>
                     </div>
-                    <input
-                      type="text"
-                      className="fullName"
-                      placeholder="Full Name"
-                      value={profileName}
-                      onChange={(e) => setProfileName(e.target.value)}
-                      required
-                    />
-                    <input
-                      type="text"
-                      className="jobTitle"
-                      placeholder="Job Title"
-                      value={profileJobTitle}
-                      onChange={(e) => setProfileJobTitle(e.target.value)}
-                      required
-                    />
-                    <input
-                      type="text"
-                      className="company"
-                      placeholder="Company"
-                      value={profileCompany}
-                      onChange={(e) => setProfileCompany(e.target.value)}
-                      required
-                    />
-                    <input
-                      type="text"
-                      className="location"
-                      placeholder="Location"
-                      value={profileLocation}
-                      onChange={(e) => setProfileLocation(e.target.value)}
-                      required
-                    />
-                    <input
-                      type="text"
-                      className="linkedin"
-                      placeholder="linkedin.com/in/"
-                      value={profileLinkedin}
-                      onChange={(e) => setProfileLinkedin(e.target.value)}
-                      required
-                    />
-                    <input
-                      type="text"
-                      className="github"
-                      placeholder="github.com/"
-                      value={profileGithub}
-                      onChange={(e) => setProfileGithub(e.target.value)}
-                      required
-                    />
-                    <input
-                      type="text"
-                      className="instagram"
-                      placeholder="instagram.com/"
-                      value={profileInstagram}
-                      onChange={(e) => setProfileInstagram(e.target.value)}
-                      required
-                    />
-                    <textarea
-                      name="bio"
-                      id="bio"
-                      cols="30"
-                      rows="10"
-                      placeholder="Bio"
-                      value={profileBio}
-                      onChange={(e) => setProfileBio(e.target.value)}
-                      required
-                    ></textarea>
+                    <div className="profile__input-group">
+                      <input
+                        type="text"
+                        className="fullName"
+                        value={profileName}
+                        onChange={(e) => setProfileName(e.target.value)}
+                        required
+                      />
+                      <label className="placeholder">Full Name</label>
+                    </div>
+                    <div className="profile__input-group">
+                      <input
+                        type="text"
+                        className="jobTitle"
+                        value={profileJobTitle}
+                        onChange={(e) => setProfileJobTitle(e.target.value)}
+                        required
+                      />
+                      <label className="placeholder">Role</label>
+                    </div>
+                    <div className="profile__input-group">
+                      <input
+                        type="text"
+                        className="company"
+                        value={profileCompany}
+                        onChange={(e) => setProfileCompany(e.target.value)}
+                        required
+                      />
+                      <label className="placeholder">Company</label>
+                    </div>
+                    <div className="profile__input-group">
+                      <input
+                        type="text"
+                        className="location"
+                        value={profileLocation}
+                        onChange={(e) => setProfileLocation(e.target.value)}
+                        required
+                      />
+                      <label className="placeholder">Location</label>
+                    </div>
+                    <div className="profile__input-group">
+                      <input
+                        type="text"
+                        className="linkedin"
+                        value={profileLinkedin}
+                        onChange={(e) => setProfileLinkedin(e.target.value)}
+                        required
+                      />
+                      <label className="placeholder">LinkedIn</label>
+                    </div>
+                    <div className="profile__input-group">
+                      <input
+                        type="text"
+                        className="github"
+                        value={profileGithub}
+                        onChange={(e) => setProfileGithub(e.target.value)}
+                        required
+                      />
+                      <label className="placeholder">Github</label>
+                    </div>
+                    <div className="profile__input-group">
+                      <input
+                        type="text"
+                        className="instagram"
+                        value={profileInstagram}
+                        onChange={(e) => setProfileInstagram(e.target.value)}
+                        required
+                      />
+                      <label className="placeholder">Instagram</label>
+                    </div>
+                    <div className="profile__input-group">
+                      <textarea
+                        name="bio"
+                        id="bio"
+                        cols="30"
+                        rows="10"
+                        value={profileBio}
+                        onChange={(e) => setProfileBio(e.target.value)}
+                        maxLength={300}
+                        required
+                      ></textarea>
+                      <label className="placeholder">Bio</label>
+                      <p className="profile__bio-counter">
+                        {profileBio.length > 0 ? 300 - profileBio.length : 300}{" "}
+                        Characters Remaining
+                      </p>
+                    </div>
+                    <select multiple onChange={handleChange}>
+                      {skills.map((skill) => (
+                        <option key={skill} value={skill}>
+                          {skill}
+                        </option>
+                      ))}
+                    </select>
                   </form>
                 </div>
                 <div className="profile--right">
@@ -218,32 +279,120 @@ const Profile = ({ user, userData }) => {
                     <h2 className="profile__preview-info__job-title">
                       {profileJobTitle}
                     </h2>
-                    <h3 className="profile__preview-info__company">
-                      {profileCompany}
-                    </h3>
-                    <h3 className="profile__preview-info__location">
-                      {profileLocation}
-                    </h3>
+                    <div className="profile__preview-info__content">
+                      <h3 className="profile__preview-info__company">
+                        {profileCompany}
+                      </h3>
+                      {profileCompany && profileLocation ? (
+                        <span className="profile__preview-info__separator">
+                          |
+                        </span>
+                      ) : (
+                        ""
+                      )}
+                      <h3 className="profile__preview-info__location">
+                        {profileLocation}
+                      </h3>
+                    </div>
                     <div className="profile__preview-info__socials">
                       <a
                         href={`https://www.linkedin.com/in/${profileLinkedin}`}
                         target="_blank"
                         rel="noreferrer"
                         className="profile__preview-info__socials__linkedin"
-                      ></a>
+                      >
+                        {profileLinkedin ? (
+                          <img
+                            src={linkedIn}
+                            alt=""
+                            className="profile__preview-info__socials__icon-linkedin"
+                          />
+                        ) : (
+                          ""
+                        )}
+                      </a>
+                      {(profileLinkedin && profileGithub) ||
+                      (profileLinkedin && profileInstagram) ? (
+                        <span className="profile__preview-info__separator">
+                          <BsDot size={25} />
+                        </span>
+                      ) : (
+                        ""
+                      )}
                       <a
                         href={`https://www.github.com/${profileGithub}`}
                         target="_blank"
                         rel="noreferrer"
                         className="profile__preview-info__socials__github"
-                      ></a>
+                      >
+                        {profileGithub ? (
+                          <img
+                            src={github}
+                            alt=""
+                            className="profile__preview-info__socials__icon-github"
+                          />
+                        ) : (
+                          ""
+                        )}
+                      </a>
+                      {profileGithub && profileInstagram ? (
+                        <span className="profile__preview-info__separator">
+                          <BsDot size={25} />
+                        </span>
+                      ) : (
+                        ""
+                      )}
                       <a
                         href={`https://www.instagram.com/${profileInstagram}`}
                         target="_blank"
                         rel="noreferrer"
                         className="profile__preview-info__socials__instagram"
-                      ></a>
+                      >
+                        {profileInstagram ? (
+                          <img
+                            src={instagram}
+                            alt=""
+                            className="profile__preview-info__socials__icon-instagram"
+                          />
+                        ) : (
+                          ""
+                        )}
+                      </a>
                     </div>
+                    {profileBio ? (
+                      <div className="profile__preview-info__container">
+                        <div className="profile__preview-info__container--left">
+                          <h1 className="profile__preview-info__bio-title">
+                            About me
+                          </h1>
+                          <p className="profile__preview-info__bio">
+                            {profileBio}
+                          </p>
+                        </div>
+                        {selectedSkills.length > 0 ? (
+                          <div className="profile__preview-info__container--right">
+                            <h1 className="profile__preview-info__container--right__skill-title">
+                              Skills
+                            </h1>
+                            {selectedSkills.map((skill) => {
+                              return (
+                                <div className="profile__preview-info__container--right__skill">
+                                  <div className="profile__preview-info__container--right__skill__container">
+                                    <p className="profile__preview-info__container--right__skill__text">
+                                      {skill}
+                                    </p>
+                                  </div>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        ) : (
+                          ""
+                        )}
+                      </div>
+                    ) : (
+                      ""
+                    )}
                   </div>
                 </div>
               </section>
