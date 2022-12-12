@@ -6,9 +6,9 @@ import illustration_one from "../../assets/illustrations/illustration_one.svg";
 import illustration_two from "../../assets/illustrations/illustration_two.svg";
 import illustration_three from "../../assets/illustrations/illustration_three.svg";
 import { AiFillCheckCircle } from "react-icons/ai";
+import { AiOutlineCheckCircle } from "react-icons/ai";
 import { FaCrown } from "react-icons/fa";
 import { BsCircleFill } from "react-icons/bs";
-import { CiCircleCheck } from "react-icons/ci";
 import { Link } from "react-router-dom";
 
 const HomePage = ({ user }) => {
@@ -147,7 +147,7 @@ const HomePage = ({ user }) => {
         <div className="feature__container">
           <div className="feature__card">
             <div className="feature__icon">
-              <CiCircleCheck size={35} />
+              <AiOutlineCheckCircle size={30} />
             </div>
             <h1 className="feature__header">
               Free, <span>Forever</span>
@@ -159,7 +159,7 @@ const HomePage = ({ user }) => {
           </div>
           <div className="feature__card">
             <div className="feature__icon">
-              <CiCircleCheck size={35} />
+              <AiOutlineCheckCircle size={30} />
             </div>
             <h1 className="feature__header">
               <span>Compatible</span>
@@ -171,7 +171,7 @@ const HomePage = ({ user }) => {
           </div>
           <div className="feature__card">
             <div className="feature__icon">
-              <CiCircleCheck size={35} />
+              <AiOutlineCheckCircle size={30} />
             </div>
             <h1 className="feature__header">
               <span>Unlimited</span> Sharing
@@ -183,7 +183,7 @@ const HomePage = ({ user }) => {
           </div>
           <div className="feature__card">
             <div className="feature__icon">
-              <CiCircleCheck size={35} />
+              <AiOutlineCheckCircle size={30} />
             </div>
             <h1 className="feature__header">
               <span>Convenient</span>

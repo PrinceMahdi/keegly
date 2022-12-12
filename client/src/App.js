@@ -11,10 +11,13 @@ import Footer from "./Components/Footer/Footer";
 import Team from "./Pages/Team/Team";
 import Pricing from "./Pages/Pricing/Pricing";
 import Contact from "./Pages/Contact/Contact";
+import Profile from "./Pages/Profile/Profile";
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 const App = () => {
   const [user, setUser] = useState(null);
+  const [userData, setUserData] = useState(null);
 
   useEffect(() => {
     const getUser = () => {
@@ -40,6 +43,20 @@ const App = () => {
     getUser();
   }, []);
 
+  useEffect(() => {
+    const getUserData = async () => {
+      try {
+        const { data } = await axios.get("http://localhost:8080/users", {
+          withCredentials: true,
+        });
+        setUserData(data);
+      } catch (error) {
+        console.log("::: There was an error: ", error);
+      }
+    };
+    getUserData();
+  }, []);
+
   return (
     <>
       <BrowserRouter>
@@ -47,7 +64,7 @@ const App = () => {
           <Route
             path="/"
             element={[
-              <Header key={1} user={user} />,
+              <Header key={1} user={user} userData={userData} />,
               <HomePage key={2} user={user} />,
               <Footer key={3} user={user} />,
             ]}
@@ -55,9 +72,13 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route
+            path="/me/:id"
+            element={<Profile user={user} userData={userData} />}
+          />
+          <Route
             path="/team"
             element={[
-              <Header key={1} user={user} />,
+              <Header key={1} user={user} userData={userData} />,
               <Team key={2} />,
               <Footer key={3} user={user} />,
             ]}
@@ -65,7 +86,7 @@ const App = () => {
           <Route
             path="/pricing"
             element={[
-              <Header key={1} user={user} />,
+              <Header key={1} user={user} userData={userData} />,
               <Pricing key={2} user={user} />,
               <Footer key={3} user={user} />,
             ]}
@@ -73,7 +94,7 @@ const App = () => {
           <Route
             path="/contact"
             element={[
-              <Header key={1} user={user} />,
+              <Header key={1} user={user} userData={userData} />,
               <Contact key={2} />,
               <Footer key={3} user={user} />,
             ]}

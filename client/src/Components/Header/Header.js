@@ -5,11 +5,13 @@ import { NavLink, Link, useNavigate, useLocation } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { AiOutlineClose } from "react-icons/ai";
 import { BsCircleFill } from "react-icons/bs";
-import { useState } from "react";
-import Mahdi from "../../assets/team/Screen Shot 2022-10-24 at 1.41.10 PM copy.png";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { v4 as uuidv4 } from "uuid";
 
-const Header = ({ user }) => {
+const Header = ({ user, userData }) => {
   const [menuOpen, setMenuOpen] = useState(false);
+
   const menuToggler = () => setMenuOpen((p) => !p);
 
   const navigate = useNavigate();
@@ -104,7 +106,15 @@ const Header = ({ user }) => {
                 className="header__profile-picture"
                 referrerPolicy="no-referrer"
               />
-              <span className="header__name">{`${user.name.givenName}`}</span>
+              {userData?.map((singleUser) => {
+                if (user.photos[0].value === singleUser.photo) {
+                  return (
+                    <Link to={`/me/${singleUser.uniqueId}`} key={uuidv4()}>
+                      <span className="header__name">{`${user.name.givenName}`}</span>
+                    </Link>
+                  );
+                }
+              })}
               <button className="header__button" onClick={logout}>
                 Logout
               </button>
