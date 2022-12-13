@@ -5,7 +5,11 @@ import { BsDot } from "react-icons/bs";
 import linkedIn from "../../assets/icons/linkedin.svg";
 import instagram from "../../assets/icons/instagram.svg";
 import github from "../../assets/icons/github.svg";
-import Multiselect from "multiselect-react-dropdown";
+import { DiCss3, DiHtml5 } from "react-icons/di";
+import { IoLogoJavascript } from "react-icons/io5";
+import { FaReact } from "react-icons/fa";
+import { SiExpress, SiMongodb } from "react-icons/si";
+import { GrNode } from "react-icons/gr";
 
 const Profile = ({ userData }) => {
   const params = useParams();
@@ -40,8 +44,19 @@ const Profile = ({ userData }) => {
   const [profileBio, setProfileBio] = useState(
     localStorage.getItem("profileBio") || ""
   );
-  const [selectedSkills, setSelectedSkills] = useState([]);
 
+  // <---------------Storing the selected skills in local storage -------------->
+  const initialArray = localStorage.getItem("myArray")
+    ? JSON.parse(localStorage.getItem("myArray"))
+    : [];
+
+  const [selectedSkills, setSelectedSkills] = useState(initialArray);
+
+  useEffect(() => {
+    localStorage.setItem("myArray", JSON.stringify(selectedSkills));
+  }, [selectedSkills]);
+
+  // <---------------Storing the user inputs in local storage -------------->
   useEffect(() => {
     localStorage.setItem("profileBanner", profileBanner);
     localStorage.setItem("profilePicture", profilePicture);
@@ -83,22 +98,9 @@ const Profile = ({ userData }) => {
     reader.readAsDataURL(file);
   };
 
-  const skills = [
-    "HTML",
-    "CSS",
-    "JavaScript",
-    "React",
-    "Node.js",
-    "Express",
-    "MongoDB",
-    //...
-  ];
-
   const handleChange = (event) => {
-    // Get the selected options from the event
     const options = event.target.options;
 
-    // Create an array of the selected skills
     const selectedOptions = [];
     for (let i = 0; i < options.length; i++) {
       if (options[i].selected) {
@@ -106,9 +108,18 @@ const Profile = ({ userData }) => {
       }
     }
 
-    // Update the state with the selected skills
     setSelectedSkills(selectedOptions);
   };
+
+  const skills = [
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "React",
+    "Node",
+    "Express",
+    "MongoDB",
+  ];
 
   return (
     <>
@@ -241,9 +252,21 @@ const Profile = ({ userData }) => {
                         Characters Remaining
                       </p>
                     </div>
-                    <select multiple onChange={handleChange}>
+                    <select
+                      multiple
+                      onChange={handleChange}
+                      className={
+                        selectedSkills.length > 0
+                          ? "profile__bio-dropdown--selected"
+                          : "profile__bio-dropdown"
+                      }
+                    >
                       {skills.map((skill) => (
-                        <option key={skill} value={skill}>
+                        <option
+                          key={skill}
+                          value={skill}
+                          className="profile__bio-dropdown-option"
+                        >
                           {skill}
                         </option>
                       ))}
@@ -255,7 +278,7 @@ const Profile = ({ userData }) => {
                     {profileBanner ? (
                       <img
                         src={profileBanner}
-                        alt="banner picture"
+                        alt="banner"
                         className="profile__preview-banner"
                       />
                     ) : (
@@ -265,7 +288,7 @@ const Profile = ({ userData }) => {
                     {profilePicture ? (
                       <img
                         src={profilePicture}
-                        alt="profile picture"
+                        alt="profile"
                         className="profile__preview-picture"
                       />
                     ) : (
@@ -374,17 +397,108 @@ const Profile = ({ userData }) => {
                             <h1 className="profile__preview-info__container--right__skill-title">
                               Skills
                             </h1>
-                            {selectedSkills.map((skill) => {
-                              return (
-                                <div className="profile__preview-info__container--right__skill">
-                                  <div className="profile__preview-info__container--right__skill__container">
-                                    <p className="profile__preview-info__container--right__skill__text">
-                                      {skill}
-                                    </p>
-                                  </div>
-                                </div>
-                              );
-                            })}
+                            <div className="profile__preview-info__container--right__skill">
+                              {selectedSkills.map((skill) => {
+                                if (skill === "CSS") {
+                                  return (
+                                    <a
+                                      href="https://css-tricks.com/"
+                                      target="_blank"
+                                      rel="noreferrer"
+                                      key={skill}
+                                    >
+                                      <p className="profile__preview-info__container--right__skill__text">
+                                        <DiCss3 size={50} />
+                                      </p>
+                                    </a>
+                                  );
+                                }
+                                if (skill === "HTML") {
+                                  return (
+                                    <a
+                                      href="https://html.com/"
+                                      target="_blank"
+                                      rel="noreferrer"
+                                      key={skill}
+                                    >
+                                      <p className="profile__preview-info__container--right__skill__text">
+                                        <DiHtml5 size={50} />
+                                      </p>
+                                    </a>
+                                  );
+                                }
+                                if (skill === "JavaScript") {
+                                  return (
+                                    <a
+                                      href="https://www.javascript.com/"
+                                      target="_blank"
+                                      rel="noreferrer"
+                                      key={skill}
+                                    >
+                                      <p className="profile__preview-info__container--right__skill__text">
+                                        <IoLogoJavascript size={50} />
+                                      </p>
+                                    </a>
+                                  );
+                                }
+                                if (skill === "React") {
+                                  return (
+                                    <a
+                                      href="https://reactjs.org/"
+                                      target="_blank"
+                                      rel="noreferrer"
+                                      key={skill}
+                                    >
+                                      <p className="profile__preview-info__container--right__skill__text">
+                                        <FaReact size={50} />
+                                      </p>
+                                    </a>
+                                  );
+                                }
+                                if (skill === "Node") {
+                                  return (
+                                    <a
+                                      href="https://nodejs.org/en/"
+                                      target="_blank"
+                                      rel="noreferrer"
+                                      key={skill}
+                                    >
+                                      <p className="profile__preview-info__container--right__skill__text">
+                                        <GrNode size={50} />
+                                      </p>
+                                    </a>
+                                  );
+                                }
+                                if (skill === "MongoDB") {
+                                  return (
+                                    <a
+                                      href="https://www.mongodb.com/"
+                                      target="_blank"
+                                      rel="noreferrer"
+                                      key={skill}
+                                    >
+                                      <p className="profile__preview-info__container--right__skill__text">
+                                        <SiMongodb size={50} />
+                                      </p>
+                                    </a>
+                                  );
+                                }
+                                if (skill === "Express") {
+                                  return (
+                                    <a
+                                      href="https://expressjs.com/"
+                                      target="_blank"
+                                      rel="noreferrer"
+                                      key={skill}
+                                    >
+                                      <p className="profile__preview-info__container--right__skill__text">
+                                        <SiExpress size={50} />
+                                      </p>
+                                    </a>
+                                  );
+                                }
+                              })}
+                            </div>
                           </div>
                         ) : (
                           ""
