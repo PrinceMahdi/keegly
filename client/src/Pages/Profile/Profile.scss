@@ -83,6 +83,17 @@
       max-width: 179px;
       margin-left: auto;
     }
+
+    &-projects {
+      border: 1px solid rgba(24, 24, 24, 0.5);
+      padding: 2em;
+      border-radius: 0.25rem;
+
+      &__button {
+        width: 100%;
+        margin-bottom: 2rem;
+      }
+    }
   }
 
   &__input {
@@ -241,7 +252,7 @@
       }
 
       &__bio {
-        margin-top: 1rem;
+        margin: 1rem 0;
         max-width: 90%;
         word-break: break-word;
         font-size: 1.2rem;
@@ -255,7 +266,7 @@
   }
 
   &--right {
-    height: 200vh;
+    height: 500vh;
     max-width: 50%;
     border-left: 1px solid rgba(24, 24, 24, 0.1);
     @include bp.small {
@@ -380,6 +391,82 @@
       outline: 2px solid $primary-dark;
       max-width: 15.9375rem;
       border: none;
+    }
+  }
+
+  &__resume {
+    &__download {
+      &-link {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0.5rem 1rem;
+        color: $primary-light;
+        background-color: $primary-dark;
+        border-radius: 0.25rem;
+        border: 1px solid rgba(24, 24, 24, 0.3);
+        margin-right: 2rem;
+        height: 3rem;
+        width: 50%;
+        margin: 3.5rem auto;
+      }
+    }
+  }
+
+  &__project {
+    &__preview {
+      &-box {
+        position: relative;
+      }
+      &-github {
+        width: 3rem;
+        height: 3rem;
+        border-radius: 0.25rem;
+        // display: none;
+      }
+      &-name {
+        width: 20rem;
+        text-align: center;
+        border: 1px solid $primary-dark;
+        padding: 1.5rem;
+        border-radius: 0 0 0.25rem 0.25rem;
+        margin-top: -7px;
+      }
+      &-title {
+        font-size: 2.5rem;
+        margin: 1rem 0 3rem 0;
+      }
+      &-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        @include bp.large {
+          column-gap: 1rem;
+          row-gap: 1rem;
+        }
+      }
+      &-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+
+      &-image {
+        width: 20rem;
+        height: 20rem;
+        object-fit: cover;
+        border-radius: 0.25rem 0.25rem 0 0;
+      }
+
+      &-link {
+        &__container {
+          margin-top: 1rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 2rem;
+        }
+      }
     }
   }
 }
