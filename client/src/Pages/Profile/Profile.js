@@ -10,6 +10,8 @@ import { IoLogoJavascript } from "react-icons/io5";
 import { FaReact } from "react-icons/fa";
 import { SiExpress, SiMongodb } from "react-icons/si";
 import { GrNode } from "react-icons/gr";
+import { IoLogoChrome } from "react-icons/io5";
+import { BsGithub } from "react-icons/bs";
 
 const Profile = ({ userData }) => {
   const params = useParams();
@@ -44,6 +46,47 @@ const Profile = ({ userData }) => {
   const [profileBio, setProfileBio] = useState(
     localStorage.getItem("profileBio") || ""
   );
+  const [projectName, setProjectName] = useState(
+    localStorage.getItem("projectName") || ""
+  );
+  const [projectGithubLink, setProjectGithubLink] = useState(
+    localStorage.getItem("projectGithubLink") || ""
+  );
+  const [projectLiveLink, setProjectLiveLink] = useState(
+    localStorage.getItem("projectLiveLink") || ""
+  );
+  const [projectPicture, setProjectPicture] = useState(
+    localStorage.getItem("projectPicture") || null
+  );
+  const [profileResume, setProfileResume] = useState(
+    localStorage.getItem("profileResume") || null
+  );
+  const [profileResumeUrl, setProfileResumeUrl] = useState(
+    localStorage.getItem("profileResumeUrl") || null
+  );
+  // <--------------- Handle Resume Download -------------->
+  const handleFileChange = (e) => {
+    // Get the selected file from the event object
+    const selectedFile = e.target.files[0];
+
+    // Update the state with the selected file
+    setProfileResume(selectedFile);
+
+    // Create a file reader
+    const reader = new FileReader();
+
+    // Event handler for when the file has been read
+    reader.onload = (event) => {
+      // Get the file URL
+      const fileUrl = event.target.result;
+
+      // Update the state with the file URL
+      setProfileResumeUrl(fileUrl);
+    };
+
+    // Read the file as a URL
+    reader.readAsDataURL(selectedFile);
+  };
 
   // <---------------Storing the selected skills in local storage -------------->
   const initialArray = localStorage.getItem("myArray")
@@ -68,6 +111,12 @@ const Profile = ({ userData }) => {
     localStorage.setItem("profileCompany", profileCompany);
     localStorage.setItem("profileLocation", profileLocation);
     localStorage.setItem("profileBio", profileBio);
+    localStorage.setItem("projectName", projectName);
+    localStorage.setItem("projectGithubLink", projectGithubLink);
+    localStorage.setItem("projectLiveLink", projectLiveLink);
+    localStorage.setItem("projectPicture", projectPicture);
+    localStorage.setItem("profileResume", profileResume);
+    localStorage.setItem("profileResumeUrl", profileResumeUrl);
   }, [
     profileBanner,
     profilePicture,
@@ -79,6 +128,12 @@ const Profile = ({ userData }) => {
     profileCompany,
     profileLocation,
     profileBio,
+    projectName,
+    projectGithubLink,
+    projectLiveLink,
+    projectPicture,
+    profileResume,
+    profileResumeUrl,
   ]);
 
   const handleProfileUpload = (e) => {
@@ -94,6 +149,14 @@ const Profile = ({ userData }) => {
     const reader = new FileReader();
     reader.onloadend = () => {
       setProfileBanner(reader.result);
+    };
+    reader.readAsDataURL(file);
+  };
+  const handleProjectPicUpload = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setProjectPicture(reader.result);
     };
     reader.readAsDataURL(file);
   };
@@ -163,6 +226,21 @@ const Profile = ({ userData }) => {
                         className="profile__picture-label"
                       >
                         Upload Picture
+                      </label>
+                    </div>
+                    <div className="profile__file--upload">
+                      <input
+                        type="file"
+                        name="profile-resume"
+                        onChange={handleFileChange}
+                        accept="application/pdf"
+                        id="profile-resume"
+                      />
+                      <label
+                        htmlFor="profile-resume"
+                        className="profile__picture-label"
+                      >
+                        Upload Resume
                       </label>
                     </div>
                     <div className="profile__input-group">
@@ -271,6 +349,54 @@ const Profile = ({ userData }) => {
                         </option>
                       ))}
                     </select>
+                    <div className="profile__bio-projects">
+                      <div className="profile__file--upload profile__bio-projects__button">
+                        <input
+                          type="file"
+                          id="profile-project"
+                          name="profile-project"
+                          placeholder="Project Picture"
+                          className="profile__picture-input"
+                          onChange={handleProjectPicUpload}
+                        />
+                        <label
+                          htmlFor="profile-project"
+                          className="profile__picture-label"
+                        >
+                          Project Picture
+                        </label>
+                      </div>
+                      <div className="profile__input-group">
+                        <input
+                          type="text"
+                          className="projectName"
+                          value={projectName}
+                          onChange={(e) => setProjectName(e.target.value)}
+                          required
+                        />
+                        <label className="placeholder">Project Name</label>
+                      </div>
+                      <div className="profile__input-group">
+                        <input
+                          type="text"
+                          className="projectGithubLink"
+                          value={projectGithubLink}
+                          onChange={(e) => setProjectGithubLink(e.target.value)}
+                          required
+                        />
+                        <label className="placeholder">Github Link</label>
+                      </div>
+                      <div className="profile__input-group">
+                        <input
+                          type="text"
+                          className="projectLiveLink"
+                          value={projectLiveLink}
+                          onChange={(e) => setProjectLiveLink(e.target.value)}
+                          required
+                        />
+                        <label className="placeholder">Site Link</label>
+                      </div>
+                    </div>
                   </form>
                 </div>
                 <div className="profile--right">
@@ -508,6 +634,60 @@ const Profile = ({ userData }) => {
                       ""
                     )}
                   </div>
+                  {projectPicture ? (
+                    <div className="profile__project__preview-wrapper">
+                      <h1 className="profile__project__preview-title">
+                        Projects
+                      </h1>
+                      <div className="profile__project__preview-container">
+                        <div className="profile__project__preview-box">
+                          <img
+                            src={projectPicture}
+                            alt="project"
+                            className="profile__project__preview-image"
+                          />
+                          {projectName && (
+                            <h3 className="profile__project__preview-name">
+                              {projectName}
+                              {projectGithubLink && (
+                                <div className="profile__project__preview-link__container">
+                                  <a
+                                    href={projectGithubLink}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                  >
+                                    <BsGithub size={40} />
+                                  </a>
+                                  {projectLiveLink && (
+                                    <a
+                                      href={projectLiveLink}
+                                      target="_blank"
+                                      rel="noreferrer"
+                                    >
+                                      <IoLogoChrome size={40} />
+                                    </a>
+                                  )}
+                                </div>
+                              )}
+                            </h3>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                  {profileResume && projectPicture ? (
+                    <a
+                      href={profileResumeUrl}
+                      download
+                      className="profile__resume__download-link"
+                    >
+                      Download Resume
+                    </a>
+                  ) : (
+                    ""
+                  )}
                 </div>
               </section>
             );
