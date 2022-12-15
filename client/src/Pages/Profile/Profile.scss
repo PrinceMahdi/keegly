@@ -73,6 +73,7 @@
         padding: 10px;
         border-radius: 0.25rem;
         max-height: 12.5625rem;
+        width: 28rem;
 
         &:focus {
           outline: none;
@@ -82,16 +83,27 @@
     &-counter {
       max-width: 179px;
       margin-left: auto;
+      span {
+        font-weight: 600;
+      }
     }
 
     &-projects {
-      border: 1px solid rgba(24, 24, 24, 0.5);
+      border: 1px solid rgba(24, 24, 24, 0.3);
       padding: 2em;
       border-radius: 0.25rem;
+      width: 100%;
 
       &__button {
         width: 100%;
         margin-bottom: 2rem;
+
+        &--valid {
+          border-bottom: 3px solid $form-validation;
+        }
+        &--invalid {
+          border-bottom: 3px solid $form-error;
+        }
       }
     }
   }
@@ -202,6 +214,9 @@
           width: 50%;
           border-right: 1px solid rgba(24, 24, 24, 0.1);
           padding-left: 5rem;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
         }
 
         &--right {
@@ -220,21 +235,22 @@
 
           &__skill {
             display: grid;
-            grid-template-columns: 1fr;
+            grid-template-columns: 1fr 1fr;
             grid-gap: 2rem;
             @include bp.large {
-              grid-template-columns: 1fr 1fr;
+              grid-template-columns: 1fr 1fr 1fr;
             }
 
             &__text {
               background-color: $primary-light;
               color: $primary-dark;
               border: 3px solid $primary-light;
-              padding: 2rem;
+              padding: 1rem;
               border-radius: 0.25rem;
               text-align: center;
               font-size: 1.2rem;
               font-weight: 600;
+              display: flex;
 
               &:hover {
                 @include mx.borderAnimation;
@@ -266,7 +282,6 @@
   }
 
   &--right {
-    height: 500vh;
     max-width: 50%;
     border-left: 1px solid rgba(24, 24, 24, 0.1);
     @include bp.small {
@@ -314,16 +329,37 @@
   }
 
   &__form {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    column-gap: 1rem;
-    row-gap: 2rem;
+    &-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      column-gap: 1rem;
+      row-gap: 2rem;
 
-    @include bp.small {
-      grid-template-columns: 1fr;
+      @include bp.small {
+        grid-template-columns: 1fr;
+      }
+      @include bp.medium {
+        grid-template-columns: 1fr;
+      }
+
+      &--bottom {
+        display: flex;
+        gap: 5rem;
+        flex-wrap: wrap;
+        margin-top: 3rem;
+        justify-content: center;
+      }
     }
-    @include bp.medium {
-      grid-template-columns: 1fr;
+
+    &-submit {
+      &__button {
+        @include mx.btn-primary;
+        width: 50%;
+
+        &:hover {
+          @include mx.btn-primary-hover;
+        }
+      }
     }
   }
 
@@ -337,9 +373,16 @@
         color: $primary-light;
         background-color: $primary-dark;
         border-radius: 0.25rem;
-        border: 1px solid rgba(24, 24, 24, 0.3);
-        margin-right: 2rem;
         height: 3rem;
+        margin-bottom: 1rem;
+
+        &--valid {
+          border-bottom: 3px solid $form-validation;
+        }
+
+        &--invalid {
+          border-bottom: 3px solid $form-error;
+        }
       }
     }
   }
@@ -353,8 +396,6 @@
       color: $primary-light;
       background-color: $primary-dark;
       border-radius: 0.25rem;
-      border: 1px solid rgba(24, 24, 24, 0.3);
-      margin-right: 2rem;
       height: 3rem;
     }
   }
@@ -409,6 +450,12 @@
         height: 3rem;
         width: 50%;
         margin: 3.5rem auto;
+        width: 20rem;
+        transition: 0.3s ease;
+
+        &:hover {
+          @include mx.btn-primary-hover;
+        }
       }
     }
   }
@@ -416,7 +463,14 @@
   &__project {
     &__preview {
       &-box {
+        box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+        border-radius: 0 0 2rem 2rem;
         position: relative;
+        transition: 0.3s ease;
+
+        &:hover {
+          transform: scale(1.03);
+        }
       }
       &-github {
         width: 3rem;
@@ -427,10 +481,14 @@
       &-name {
         width: 20rem;
         text-align: center;
-        border: 1px solid $primary-dark;
-        padding: 1.5rem;
-        border-radius: 0 0 0.25rem 0.25rem;
+        border: 2px solid rgba(24, 24, 24, 0.1);
+        border-radius: 0 0 2rem 2rem;
         margin-top: -7px;
+
+        h3 {
+          padding: 1.5rem;
+          font-weight: 400;
+        }
       }
       &-title {
         font-size: 2.5rem;
@@ -439,6 +497,14 @@
       &-container {
         display: grid;
         grid-template-columns: 1fr;
+
+        a {
+          transition: 0.3s ease;
+        }
+
+        a:hover {
+          transform: scale(1.1);
+        }
         @include bp.large {
           column-gap: 1rem;
           row-gap: 1rem;
@@ -455,16 +521,17 @@
         width: 20rem;
         height: 20rem;
         object-fit: cover;
-        border-radius: 0.25rem 0.25rem 0 0;
+        border-radius: 2rem 2rem 0 0;
       }
 
       &-link {
         &__container {
-          margin-top: 1rem;
           display: flex;
           align-items: center;
           justify-content: center;
           gap: 2rem;
+          padding: 1rem;
+          border-top: 1px solid rgba(24, 24, 24, 0.1);
         }
       }
     }
@@ -474,4 +541,8 @@
 .searchBox {
   border: none !important;
   height: 2rem;
+}
+
+.profile__color-picker {
+  all: unset;
 }

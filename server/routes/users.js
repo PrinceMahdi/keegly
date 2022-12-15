@@ -13,4 +13,22 @@ router.get("/", (req, res) => {
   }
 });
 
+// make a post request that adds information to the user that's logged in
+router.post("/", (req, res) => {
+  try {
+    const { name, email, password } = req.body;
+    const newUser = {
+      id: newId(userData),
+      name,
+      email,
+      password,
+    };
+    userData.push(newUser);
+    writeJSONFile(userDataJSONFile, userData);
+    res.status(201).json(newUser);
+  } catch (error) {
+    console.log(`::: There was an error: ${error} :::`);
+  }
+});
+
 module.exports = router;

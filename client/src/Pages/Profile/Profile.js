@@ -64,6 +64,15 @@ const Profile = ({ userData }) => {
   const [profileResumeUrl, setProfileResumeUrl] = useState(
     localStorage.getItem("profileResumeUrl") || null
   );
+  const [color, setColor] = useState(
+    localStorage.getItem("color") || "#181818"
+  );
+
+  // <--------------- Clear local storage -------------->
+  const clearLocalStorage = () => {
+    localStorage.clear();
+  };
+
   // <--------------- Handle Resume Download -------------->
   const handleFileChange = (e) => {
     // Get the selected file from the event object
@@ -117,6 +126,7 @@ const Profile = ({ userData }) => {
     localStorage.setItem("projectPicture", projectPicture);
     localStorage.setItem("profileResume", profileResume);
     localStorage.setItem("profileResumeUrl", profileResumeUrl);
+    localStorage.setItem("color", color);
   }, [
     profileBanner,
     profilePicture,
@@ -134,6 +144,7 @@ const Profile = ({ userData }) => {
     projectPicture,
     profileResume,
     profileResumeUrl,
+    color,
   ]);
 
   const handleProfileUpload = (e) => {
@@ -184,6 +195,8 @@ const Profile = ({ userData }) => {
     "MongoDB",
   ];
 
+  // clearLocalStorage();
+
   return (
     <>
       {userData &&
@@ -196,206 +209,249 @@ const Profile = ({ userData }) => {
                     Profile <span>Maker</span>
                   </h1>
                   <form action="" className="profile__form">
-                    <div className="profile__banner__file--upload">
-                      <input
-                        type="file"
-                        id="banner-picture"
-                        name="banner-picture"
-                        placeholder="Your Banner"
-                        className="banner__picture-input"
-                        onChange={handleBannerUpload}
-                      />
-                      <label
-                        htmlFor="banner-picture"
-                        className="profile__banner__picture-label"
+                    <div className="profile__form-wrapper">
+                      <div
+                        className={
+                          profileBanner
+                            ? "profile__banner__file--upload profile__banner__file--upload--valid"
+                            : "profile__banner__file--upload profile__banner__file--upload--invalid"
+                        }
                       >
-                        Upload Banner
-                      </label>
-                    </div>
-                    <div className="profile__file--upload">
-                      <input
-                        type="file"
-                        id="profile-picture"
-                        name="profile-picture"
-                        placeholder="Your Image"
-                        className="profile__picture-input"
-                        onChange={handleProfileUpload}
-                      />
-                      <label
-                        htmlFor="profile-picture"
-                        className="profile__picture-label"
-                      >
-                        Upload Picture
-                      </label>
-                    </div>
-                    <div className="profile__file--upload">
-                      <input
-                        type="file"
-                        name="profile-resume"
-                        onChange={handleFileChange}
-                        accept="application/pdf"
-                        id="profile-resume"
-                      />
-                      <label
-                        htmlFor="profile-resume"
-                        className="profile__picture-label"
-                      >
-                        Upload Resume
-                      </label>
-                    </div>
-                    <div className="profile__input-group">
-                      <input
-                        type="text"
-                        className="fullName"
-                        value={profileName}
-                        onChange={(e) => setProfileName(e.target.value)}
-                        required
-                      />
-                      <label className="placeholder">Full Name</label>
-                    </div>
-                    <div className="profile__input-group">
-                      <input
-                        type="text"
-                        className="jobTitle"
-                        value={profileJobTitle}
-                        onChange={(e) => setProfileJobTitle(e.target.value)}
-                        required
-                      />
-                      <label className="placeholder">Role</label>
-                    </div>
-                    <div className="profile__input-group">
-                      <input
-                        type="text"
-                        className="company"
-                        value={profileCompany}
-                        onChange={(e) => setProfileCompany(e.target.value)}
-                        required
-                      />
-                      <label className="placeholder">Company</label>
-                    </div>
-                    <div className="profile__input-group">
-                      <input
-                        type="text"
-                        className="location"
-                        value={profileLocation}
-                        onChange={(e) => setProfileLocation(e.target.value)}
-                        required
-                      />
-                      <label className="placeholder">Location</label>
-                    </div>
-                    <div className="profile__input-group">
-                      <input
-                        type="text"
-                        className="linkedin"
-                        value={profileLinkedin}
-                        onChange={(e) => setProfileLinkedin(e.target.value)}
-                        required
-                      />
-                      <label className="placeholder">LinkedIn</label>
-                    </div>
-                    <div className="profile__input-group">
-                      <input
-                        type="text"
-                        className="github"
-                        value={profileGithub}
-                        onChange={(e) => setProfileGithub(e.target.value)}
-                        required
-                      />
-                      <label className="placeholder">Github</label>
-                    </div>
-                    <div className="profile__input-group">
-                      <input
-                        type="text"
-                        className="instagram"
-                        value={profileInstagram}
-                        onChange={(e) => setProfileInstagram(e.target.value)}
-                        required
-                      />
-                      <label className="placeholder">Instagram</label>
-                    </div>
-                    <div className="profile__input-group">
-                      <textarea
-                        name="bio"
-                        id="bio"
-                        cols="30"
-                        rows="10"
-                        value={profileBio}
-                        onChange={(e) => setProfileBio(e.target.value)}
-                        maxLength={300}
-                        required
-                      ></textarea>
-                      <label className="placeholder">Bio</label>
-                      <p className="profile__bio-counter">
-                        {profileBio.length > 0 ? 300 - profileBio.length : 300}{" "}
-                        Characters Remaining
-                      </p>
-                    </div>
-                    <select
-                      multiple
-                      onChange={handleChange}
-                      className={
-                        selectedSkills.length > 0
-                          ? "profile__bio-dropdown--selected"
-                          : "profile__bio-dropdown"
-                      }
-                    >
-                      {skills.map((skill) => (
-                        <option
-                          key={skill}
-                          value={skill}
-                          className="profile__bio-dropdown-option"
-                        >
-                          {skill}
-                        </option>
-                      ))}
-                    </select>
-                    <div className="profile__bio-projects">
-                      <div className="profile__file--upload profile__bio-projects__button">
                         <input
                           type="file"
-                          id="profile-project"
-                          name="profile-project"
-                          placeholder="Project Picture"
-                          className="profile__picture-input"
-                          onChange={handleProjectPicUpload}
+                          id="banner-picture"
+                          name="banner-picture"
+                          placeholder="Your Banner"
+                          className="banner__picture-input"
+                          onChange={handleBannerUpload}
                         />
                         <label
-                          htmlFor="profile-project"
+                          htmlFor="banner-picture"
+                          className="profile__banner__picture-label"
+                        >
+                          Upload Banner
+                        </label>
+                      </div>
+                      <div
+                        className={
+                          profileBanner
+                            ? "profile__banner__file--upload profile__banner__file--upload--valid"
+                            : "profile__banner__file--upload profile__banner__file--upload--invalid"
+                        }
+                      >
+                        <input
+                          type="file"
+                          id="profile-picture"
+                          name="profile-picture"
+                          placeholder="Your Image"
+                          className="profile__picture-input"
+                          onChange={handleProfileUpload}
+                        />
+                        <label
+                          htmlFor="profile-picture"
                           className="profile__picture-label"
                         >
-                          Project Picture
+                          Upload Picture
+                        </label>
+                      </div>
+                      <div
+                        className={
+                          profileBanner
+                            ? "profile__banner__file--upload profile__banner__file--upload--valid"
+                            : "profile__banner__file--upload profile__banner__file--upload--invalid"
+                        }
+                      >
+                        <input
+                          type="file"
+                          name="profile-resume"
+                          onChange={handleFileChange}
+                          accept="application/pdf"
+                          id="profile-resume"
+                        />
+                        <label
+                          htmlFor="profile-resume"
+                          className="profile__picture-label"
+                        >
+                          Upload Resume
                         </label>
                       </div>
                       <div className="profile__input-group">
                         <input
                           type="text"
-                          className="projectName"
-                          value={projectName}
-                          onChange={(e) => setProjectName(e.target.value)}
+                          className="fullName"
+                          value={profileName}
+                          onChange={(e) => setProfileName(e.target.value)}
                           required
                         />
-                        <label className="placeholder">Project Name</label>
+                        <label className="placeholder">Full Name</label>
                       </div>
                       <div className="profile__input-group">
                         <input
                           type="text"
-                          className="projectGithubLink"
-                          value={projectGithubLink}
-                          onChange={(e) => setProjectGithubLink(e.target.value)}
+                          className="jobTitle"
+                          value={profileJobTitle}
+                          onChange={(e) => setProfileJobTitle(e.target.value)}
                           required
                         />
-                        <label className="placeholder">Github Link</label>
+                        <label className="placeholder">Role</label>
                       </div>
                       <div className="profile__input-group">
                         <input
                           type="text"
-                          className="projectLiveLink"
-                          value={projectLiveLink}
-                          onChange={(e) => setProjectLiveLink(e.target.value)}
+                          className="company"
+                          value={profileCompany}
+                          onChange={(e) => setProfileCompany(e.target.value)}
                           required
                         />
-                        <label className="placeholder">Site Link</label>
+                        <label className="placeholder">Company</label>
                       </div>
+                      <div className="profile__input-group">
+                        <input
+                          type="text"
+                          className="location"
+                          value={profileLocation}
+                          onChange={(e) => setProfileLocation(e.target.value)}
+                          required
+                        />
+                        <label className="placeholder">Location</label>
+                      </div>
+                      <div className="profile__input-group">
+                        <input
+                          type="text"
+                          className="linkedin"
+                          value={profileLinkedin}
+                          onChange={(e) => setProfileLinkedin(e.target.value)}
+                          required
+                        />
+                        <label className="placeholder">LinkedIn</label>
+                      </div>
+                      <div className="profile__input-group">
+                        <input
+                          type="text"
+                          className="github"
+                          value={profileGithub}
+                          onChange={(e) => setProfileGithub(e.target.value)}
+                          required
+                        />
+                        <label className="placeholder">Github</label>
+                      </div>
+                      <div className="profile__input-group">
+                        <input
+                          type="text"
+                          className="instagram"
+                          value={profileInstagram}
+                          onChange={(e) => setProfileInstagram(e.target.value)}
+                          required
+                        />
+                        <label className="placeholder">Instagram</label>
+                      </div>
+                      <input
+                        type="color"
+                        onChange={(e) => setColor(e.target.value)}
+                        value={color}
+                        className="profile__color-picker"
+                      />
+                    </div>
+                    <div className="profile__form-wrapper--bottom">
+                      <div className="profile__input-group">
+                        <textarea
+                          name="bio"
+                          id="bio"
+                          cols="30"
+                          rows="10"
+                          value={profileBio}
+                          onChange={(e) => setProfileBio(e.target.value)}
+                          maxLength={300}
+                          required
+                        ></textarea>
+                        <label className="placeholder">Bio</label>
+                        <p className="profile__bio-counter">
+                          <span>
+                            {profileBio.length > 0
+                              ? 300 - profileBio.length
+                              : 300}
+                          </span>{" "}
+                          Characters Remaining
+                        </p>
+                      </div>
+                      <select
+                        multiple
+                        onChange={handleChange}
+                        className={
+                          selectedSkills.length > 0
+                            ? "profile__bio-dropdown--selected"
+                            : "profile__bio-dropdown"
+                        }
+                      >
+                        {skills.map((skill) => (
+                          <option
+                            key={skill}
+                            value={skill}
+                            className="profile__bio-dropdown-option"
+                          >
+                            {skill}
+                          </option>
+                        ))}
+                      </select>
+                      <div className="profile__bio-projects">
+                        <div
+                          className={
+                            projectPicture
+                              ? "profile__file--upload profile__bio-projects__button profile__bio-projects__button--valid"
+                              : "profile__file--upload profile__bio-projects__button profile__bio-projects__button--invalid"
+                          }
+                        >
+                          <input
+                            type="file"
+                            id="profile-project"
+                            name="profile-project"
+                            placeholder="Project Picture"
+                            className="profile__picture-input"
+                            onChange={handleProjectPicUpload}
+                          />
+                          <label
+                            htmlFor="profile-project"
+                            className="profile__picture-label"
+                          >
+                            Project Picture
+                          </label>
+                        </div>
+                        <div className="profile__input-group">
+                          <input
+                            type="text"
+                            className="projectName"
+                            value={projectName}
+                            onChange={(e) => setProjectName(e.target.value)}
+                            required
+                          />
+                          <label className="placeholder">Project Name</label>
+                        </div>
+                        <div className="profile__input-group">
+                          <input
+                            type="text"
+                            className="projectGithubLink"
+                            value={projectGithubLink}
+                            onChange={(e) =>
+                              setProjectGithubLink(e.target.value)
+                            }
+                            required
+                          />
+                          <label className="placeholder">Github Link</label>
+                        </div>
+                        <div className="profile__input-group">
+                          <input
+                            type="text"
+                            className="projectLiveLink"
+                            value={projectLiveLink}
+                            onChange={(e) => setProjectLiveLink(e.target.value)}
+                            required
+                          />
+                          <label className="placeholder">Site Link</label>
+                        </div>
+                      </div>
+                      <button className="profile__form-submit__button">
+                        Save Profile
+                      </button>
                     </div>
                   </form>
                 </div>
@@ -406,6 +462,7 @@ const Profile = ({ userData }) => {
                         src={profileBanner}
                         alt="banner"
                         className="profile__preview-banner"
+                        style={{ borderColor: color, borderWidth: "3px" }}
                       />
                     ) : (
                       ""
@@ -416,6 +473,7 @@ const Profile = ({ userData }) => {
                         src={profilePicture}
                         alt="profile"
                         className="profile__preview-picture"
+                        style={{ borderColor: color, borderWidth: "3px" }}
                       />
                     ) : (
                       ""
@@ -647,8 +705,8 @@ const Profile = ({ userData }) => {
                             className="profile__project__preview-image"
                           />
                           {projectName && (
-                            <h3 className="profile__project__preview-name">
-                              {projectName}
+                            <div className="profile__project__preview-name">
+                              <h3>{projectName}</h3>
                               {projectGithubLink && (
                                 <div className="profile__project__preview-link__container">
                                   <a
@@ -669,7 +727,7 @@ const Profile = ({ userData }) => {
                                   )}
                                 </div>
                               )}
-                            </h3>
+                            </div>
                           )}
                         </div>
                       </div>
