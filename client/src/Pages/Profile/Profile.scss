@@ -350,6 +350,17 @@
         justify-content: center;
       }
     }
+
+    &-submit {
+      &__button {
+        @include mx.btn-primary;
+        width: 50%;
+
+        &:hover {
+          @include mx.btn-primary-hover;
+        }
+      }
+    }
   }
 
   &__banner {
