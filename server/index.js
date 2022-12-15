@@ -8,7 +8,7 @@ const passport = require("passport");
 const authRoute = require("./routes/auth");
 const usersRoute = require("./routes/users");
 
-// <------------------- INITIALIZE THE EXPRESS SERVER ------------------->
+// <-------------------- INITIALIZE THE EXPRESS SERVER -------------------->
 const app = express();
 
 // <-------------------- FOR .env FILES -------------------->
