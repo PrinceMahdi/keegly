@@ -15,7 +15,11 @@ const app = express();
 require("dotenv").config();
 
 // <-------------------- MIDDLEWARE -------------------->
-app.use(express.json());
+app.use(express.json({ limit: "50mb" }));
+app.use(express.urlencoded({ limit: "50mb" }));
+
+
+// app.use(cors());
 
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -23,10 +27,47 @@ app.get("/", (_req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+
+const storeItems = new Map([
+  [1, { priceInCents: 2499, name: "Card" }],
+  [2, { priceInCents: 3499, name: "Bracelet" }],
+]);
+
+app.post("/create-checkout-session", async (req, res) => {
+  const { items } = req.body;
+
+  const line_items = [];
+
+  items.forEach((item) => {
+    const product = storeItems.get(item.id);
+    line_items.push({
+      price_data: {
+        currency: "usd",
+        product_data: {
+          name: product.name,
+        },
+        unit_amount: product.priceInCents,
+      },
+      quantity: item.quantity,
+    });
+  });
+
+  const session = await stripe.checkout.sessions.create({
+    payment_method_types: ["card"],
+    line_items,
+    mode: "payment",
+    success_url: process.env.SUCCESS_URL,
+    cancel_url: process.env.CANCEL_URL,
+  });
+
+  res.json({ id: session.id });
+});
+
 app.use(
   cookieSession({
     name: "session",
-    keys: ["test"],
+    keys: ["keegly"],
     maxAge: 24 * 60 * 60 * 1000, // 24 hours
   })
 );
@@ -35,7 +76,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: ["http://localhost:8080", "http://localhost:3000"],
     methods: "GET, POST, PUT, DELETE, OPTIONS",
     credentials: true,
   })

@@ -12,6 +12,7 @@ import { SiExpress, SiMongodb } from "react-icons/si";
 import { GrNode } from "react-icons/gr";
 import { IoLogoChrome } from "react-icons/io5";
 import { BsGithub } from "react-icons/bs";
+import axios from "axios";
 
 const Profile = ({ userData }) => {
   const params = useParams();
@@ -197,6 +198,34 @@ const Profile = ({ userData }) => {
 
   // clearLocalStorage();
 
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    const newUser = {
+      profileBanner,
+      profilePicture,
+      profileName,
+      profileJobTitle,
+      profileLinkedin,
+      profileGithub,
+      profileInstagram,
+      profileCompany,
+      profileLocation,
+      profileBio,
+      projectName,
+      projectGithubLink,
+      projectLiveLink,
+      projectPicture,
+      profileResume,
+      profileResumeUrl,
+      selectedSkills,
+      color,
+    };
+    axios
+      .post(`http://localhost:8080/newprofile/${params.id}`, newUser)
+      .then(console.log("::: New profile created :::"))
+      .catch((err) => console.log(err));
+  };
+
   return (
     <>
       {userData &&
@@ -208,7 +237,11 @@ const Profile = ({ userData }) => {
                   <h1 className="profile--left__title">
                     Profile <span>Maker</span>
                   </h1>
-                  <form action="" className="profile__form">
+                  <form
+                    action=""
+                    className="profile__form"
+                    onSubmit={handleFormSubmit}
+                  >
                     <div className="profile__form-wrapper">
                       <div
                         className={
@@ -234,7 +267,7 @@ const Profile = ({ userData }) => {
                       </div>
                       <div
                         className={
-                          profileBanner
+                          profilePicture
                             ? "profile__banner__file--upload profile__banner__file--upload--valid"
                             : "profile__banner__file--upload profile__banner__file--upload--invalid"
                         }
@@ -256,7 +289,7 @@ const Profile = ({ userData }) => {
                       </div>
                       <div
                         className={
-                          profileBanner
+                          profileResume
                             ? "profile__banner__file--upload profile__banner__file--upload--valid"
                             : "profile__banner__file--upload profile__banner__file--upload--invalid"
                         }

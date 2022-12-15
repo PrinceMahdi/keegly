@@ -12,12 +12,21 @@ import Team from "./Pages/Team/Team";
 import Pricing from "./Pages/Pricing/Pricing";
 import Contact from "./Pages/Contact/Contact";
 import Profile from "./Pages/Profile/Profile";
-import { useEffect, useState } from "react";
 import axios from "axios";
+import { useEffect, useState } from "react";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import User from "./Pages/User/User";
 
 const App = () => {
+  // Stripe
+  const PUBLISHABLE_KEY = process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY;
+  const stripeTestPromise = loadStripe(PUBLISHABLE_KEY);
+
   const [user, setUser] = useState(null);
   const [userData, setUserData] = useState(null);
+
+
 
   useEffect(() => {
     const getUser = () => {
@@ -87,7 +96,9 @@ const App = () => {
             path="/pricing"
             element={[
               <Header key={1} user={user} userData={userData} />,
-              <Pricing key={2} user={user} />,
+              <Elements stripe={stripeTestPromise}>
+                <Pricing key={2} user={user} />
+              </Elements>,
               <Footer key={3} user={user} />,
             ]}
           />
@@ -99,6 +110,7 @@ const App = () => {
               <Footer key={3} user={user} />,
             ]}
           />
+          <Route path="/mahdi" element={<User/>} />
         </Routes>
       </BrowserRouter>
     </>
