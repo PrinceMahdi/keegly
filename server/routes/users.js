@@ -1,4 +1,5 @@
 const express = require("express");
+const { write } = require("node:fs");
 const path = require("node:path");
 const router = express.Router();
 const { newId, writeJSONFile } = require("../helper/helper");
@@ -13,22 +14,55 @@ router.get("/", (req, res) => {
   }
 });
 
-// make a post request that adds information to the user that's logged in
-router.post("/", (req, res) => {
-  try {
-    const { name, email, password } = req.body;
-    const newUser = {
-      id: newId(userData),
-      name,
-      email,
-      password,
-    };
-    userData.push(newUser);
-    writeJSONFile(userDataJSONFile, userData);
-    res.status(201).json(newUser);
-  } catch (error) {
-    console.log(`::: There was an error: ${error} :::`);
-  }
+router.post("/newprofile/:id", (req, res) => {
+  const {
+    profileBanner,
+    profilePicture,
+    profileName,
+    profileJobTitle,
+    profileLinkedin,
+    profileGithub,
+    profileInstagram,
+    profileCompany,
+    profileLocation,
+    profileBio,
+    projectName,
+    projectGithubLink,
+    projectLiveLink,
+    projectPicture,
+    profileResume,
+    profileResumeUrl,
+    selectedSkills,
+    color,
+  } = req.body;
+
+  const newUser = {
+    profileBanner,
+    profilePicture,
+    profileName,
+    profileJobTitle,
+    profileLinkedin,
+    profileGithub,
+    profileInstagram,
+    profileCompany,
+    profileLocation,
+    profileBio,
+    projectName,
+    projectGithubLink,
+    projectLiveLink,
+    projectPicture,
+    profileResume,
+    profileResumeUrl,
+    selectedSkills,
+    color,
+  };
+
+  const updatedUserData = userData.map((user) => {
+    return user.uniqueId == req.params.id ? { ...user, ...newUser } : user;
+  });
+
+  writeJSONFile(userDataJSONFile, updatedUserData);
+  res.status(200).json(updatedUserData);
 });
 
 module.exports = router;
