@@ -1,0 +1,33 @@
+{
+  "files": {
+    "main.css": "/keegly/static/css/main.ad932a02.css",
+    "main.js": "/keegly/static/js/main.9b43c659.js",
+    "static/media/iPhone 14 Pro Mockup.svg": "/keegly/static/media/iPhone 14 Pro Mockup.b54b62a60d13640209e7069451bf953b.svg",
+    "static/media/mid copy.png": "/keegly/static/media/mid copy.6613b1e18815251bb68a.png",
+    "static/media/Screen Shot 2022-10-24 at 1.41.10 PM copy.png": "/keegly/static/media/Screen Shot 2022-10-24 at 1.41.10 PM copy.9d746f5d71b75953570c.png",
+    "static/media/Screenshot 2022-12-14 at 9.50.01 PM copy.png": "/keegly/static/media/Screenshot 2022-12-14 at 9.50.01 PM copy.c6e1175f727e1fa1bd47.png",
+    "static/media/contact.svg": "/keegly/static/media/contact.351378cca4c7b5dbac3897f125425ae6.svg",
+    "static/media/pexels-photo-1097456 copy.webp": "/keegly/static/media/pexels-photo-1097456 copy.3cebadc60903ef1f7671.webp",
+    "static/media/titillium-web-300.ttf": "/keegly/static/media/titillium-web-300.2b8d1521998c2d55bb51.ttf",
+    "static/media/titillium-web-400.ttf": "/keegly/static/media/titillium-web-400.e53e0538893d432e0635.ttf",
+    "static/media/titillium-web-600.ttf": "/keegly/static/media/titillium-web-600.d4d3eeb6e2367e6796c3.ttf",
+    "static/media/titillium-web-200.ttf": "/keegly/static/media/titillium-web-200.2d07e99a2247f13f7969.ttf",
+    "static/media/titillium-web-700.ttf": "/keegly/static/media/titillium-web-700.a267a8b6b783d7d62039.ttf",
+    "static/media/illustration_two.svg": "/keegly/static/media/illustration_two.0116d804ec99e364b7d7110a670fc066.svg",
+    "static/media/illustration_three.svg": "/keegly/static/media/illustration_three.bbb6562cdc28aa3296259358d1913952.svg",
+    "static/media/illustration_one.svg": "/keegly/static/media/illustration_one.98db959e56e250b8e369d9e4b03df967.svg",
+    "static/media/Travels.svg": "/keegly/static/media/Travels.b385c81f1379db8e475f04deb1f447b4.svg",
+    "static/media/titillium-web-900.ttf": "/keegly/static/media/titillium-web-900.b06b28a5ea3d6c76e3f2.ttf",
+    "static/media/instagram.svg": "/keegly/static/media/instagram.cb2c65c17411d202470e311582dbe2de.svg",
+    "static/media/linkedin.svg": "/keegly/static/media/linkedin.1f3d78ca7f7c42bc2b820da32c7b5492.svg",
+    "static/media/github.svg": "/keegly/static/media/github.25c7f6fb01ca3346cadcdd87a85d57e7.svg",
+    "static/media/icons8-google.svg": "/keegly/static/media/icons8-google.9a7800d06783d80a1c12.svg",
+    "index.html": "/keegly/index.html",
+    "main.ad932a02.css.map": "/keegly/static/css/main.ad932a02.css.map",
+    "main.9b43c659.js.map": "/keegly/static/js/main.9b43c659.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ad932a02.css",
+    "static/js/main.9b43c659.js"
+  ]
+}
