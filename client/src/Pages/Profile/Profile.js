@@ -196,7 +196,7 @@ const Profile = ({ userData }) => {
     "MongoDB",
   ];
 
-  // clearLocalStorage();
+  clearLocalStorage();
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
