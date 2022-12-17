@@ -34,11 +34,16 @@
     padding: 2.5rem;
     width: 26rem;
     position: relative;
+    transition: 0.3s ease;
     &:first-child,
     &:last-child {
       background: rgba(255, 255, 255, 0.5);
       box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
       border: 1px solid $primary-dark;
+    }
+
+    &:hover {
+      border: 1px solid $primary-semi-light;
     }
 
     &:first-child {
@@ -64,6 +69,10 @@
       background-position: -19px -36px;
       box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
       border: 1px solid rgba(255, 255, 255, 0.18);
+
+      &:hover {
+        @include mx.borderAnimation;
+      }
     }
 
     &-popular {

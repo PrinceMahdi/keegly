@@ -188,3 +188,27 @@
     }
   }
 }
+
+@mixin blinkingBorderValid {
+  border-bottom: 3.5px solid $form-validation;
+  animation: blink 2.5s;
+  animation-iteration-count: infinite;
+
+  @keyframes blink {
+    50% {
+      border-color: $primary-light;
+    }
+  }
+}
+
+@mixin blinkingBorderInvalid {
+  border-bottom: 2.5px solid $form-error;
+  animation: blink 2.5s;
+  animation-iteration-count: infinite;
+
+  @keyframes blink {
+    50% {
+      border-color: $primary-light;
+    }
+  }
+}

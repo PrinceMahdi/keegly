@@ -11,21 +11,107 @@ import Footer from "./Components/Footer/Footer";
 import Team from "./Pages/Team/Team";
 import Pricing from "./Pages/Pricing/Pricing";
 import Contact from "./Pages/Contact/Contact";
+import Profile from "./Pages/Profile/Profile";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import User from "./Pages/User/User";
 
 const App = () => {
+  // Stripe
+  const PUBLISHABLE_KEY = process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY;
+  const stripeTestPromise = loadStripe(PUBLISHABLE_KEY);
+
+  const [user, setUser] = useState(null);
+  const [userData, setUserData] = useState(null);
+
+
+
+  useEffect(() => {
+    const getUser = () => {
+      fetch("http://localhost:8080/auth/login/success", {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      })
+        .then((res) => {
+          if (res.status === 200) return res.json();
+          throw new Error("failed to authenticate user");
+        })
+        .then((resJson) => {
+          setUser(resJson.user);
+        })
+        .catch((error) => {
+          console.log(`::: There was an error: ${error} :::`);
+        });
+    };
+    getUser();
+  }, []);
+
+  useEffect(() => {
+    const getUserData = async () => {
+      try {
+        const { data } = await axios.get("http://localhost:8080/users", {
+          withCredentials: true,
+        });
+        setUserData(data);
+      } catch (error) {
+        console.log("::: There was an error: ", error);
+      }
+    };
+    getUserData();
+  }, []);
+
   return (
     <>
       <BrowserRouter>
-        <Header />
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route
+            path="/"
+            element={[
+              <Header key={1} user={user} userData={userData} />,
+              <HomePage key={2} user={user} />,
+              <Footer key={3} user={user} />,
+            ]}
+          />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/team" element={<Team />} />
-          <Route path="/pricing" element={<Pricing />} />
-          <Route path="/contact" element={<Contact />} />
+          <Route
+            path="/me/:id"
+            element={<Profile user={user} userData={userData} />}
+          />
+          <Route
+            path="/team"
+            element={[
+              <Header key={1} user={user} userData={userData} />,
+              <Team key={2} />,
+              <Footer key={3} user={user} />,
+            ]}
+          />
+          <Route
+            path="/pricing"
+            element={[
+              <Header key={1} user={user} userData={userData} />,
+              <Elements stripe={stripeTestPromise}>
+                <Pricing key={2} user={user} />
+              </Elements>,
+              <Footer key={3} user={user} />,
+            ]}
+          />
+          <Route
+            path="/contact"
+            element={[
+              <Header key={1} user={user} userData={userData} />,
+              <Contact key={2} />,
+              <Footer key={3} user={user} />,
+            ]}
+          />
+          <Route path="/mahdi" element={<User/>} />
         </Routes>
-        <Footer />
       </BrowserRouter>
     </>
   );

@@ -32,6 +32,14 @@ const Contact = () => {
   };
   return (
     <>
+      <div className="contact__wrapper">
+        <h1 className="contact__title">
+          Get in <span>touch</span>.
+        </h1>
+        <h4 className="contact__subtitle">
+          If you have a question, please reach out.
+        </h4>
+      </div>
       <section className="contact">
         <div className="contact--left">
           <img src={ContactImg} alt="contact us" className="contact__img" />
@@ -44,7 +52,9 @@ const Contact = () => {
             <input type="email" name="user_email" />
             <label>Message</label>
             <textarea name="message" />
-            <button type="submit" className="contact__button">Send</button>
+            <button type="submit" className="contact__button">
+              Send
+            </button>
           </form>
         </div>
       </section>

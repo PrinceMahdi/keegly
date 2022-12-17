@@ -1,47 +1,64 @@
 /* < ------------ SCSS IMPORTS ------------> */
 import "./HomePage.scss";
 /* < ------------ ASSET IMPORTS ------------> */
-import img from "../../assets/illustrations/iPhone X.svg";
+import img from "../../assets/illustrations/iPhone 14 Pro Mockup.svg";
 import illustration_one from "../../assets/illustrations/illustration_one.svg";
 import illustration_two from "../../assets/illustrations/illustration_two.svg";
 import illustration_three from "../../assets/illustrations/illustration_three.svg";
 import { AiFillCheckCircle } from "react-icons/ai";
+import { AiOutlineCheckCircle } from "react-icons/ai";
 import { FaCrown } from "react-icons/fa";
 import { BsCircleFill } from "react-icons/bs";
-import { FcRating } from "react-icons/fc";
-import { CiCircleCheck } from "react-icons/ci";
+import { Link } from "react-router-dom";
 
-const HomePage = () => {
+const HomePage = ({ user }) => {
   return (
     <>
       <section className="home">
         <div className="home__wrapper">
-          <h3 className="home__subtitle">
-            <FaCrown /> Make a connection today.
-          </h3>
-          <h1 className="home__title">
-            Network Like a <span>Pro</span>
-            <BsCircleFill size={7} />
-          </h1>
-          <p className="home__description"></p>
-          <div className="home__feature-container">
-            <div className="home__feature-wrapper">
-              <AiFillCheckCircle className="home__check-icon" />
-              <p className="home__feature">Connect Instantly</p>
+          <div className="home__wrapper--left">
+            <h3 className="home__subtitle">
+              <FaCrown /> Make a connection today.
+            </h3>
+            <h1 className="home__title">
+              Network Like a <span>Pro</span>
+              <BsCircleFill size={7} />
+            </h1>
+            <p className="home__description"></p>
+            <div className="home__feature-container">
+              <div className="home__feature-wrapper">
+                <AiFillCheckCircle
+                  className="home__check-icon"
+                  color="white"
+                  size={18}
+                />
+                <p className="home__feature">Connect Instantly</p>
+              </div>
+              <div className="home__feature-wrapper">
+                <AiFillCheckCircle
+                  className="home__check-icon"
+                  color="white"
+                  size={18}
+                />
+                <p className="home__feature">Drive More Leads</p>
+              </div>
+              <div className="home__feature-wrapper">
+                <AiFillCheckCircle
+                  className="home__check-icon"
+                  color="white"
+                  size={18}
+                />
+                <p className="home__feature">Reach More People</p>
+              </div>
             </div>
-            <div className="home__feature-wrapper">
-              <AiFillCheckCircle className="home__check-icon" />
-              <p className="home__feature">Drive More Leads</p>
+            <div className="home__illustrations">
+              <div className="home__illustrations-card"></div>
             </div>
-            <div className="home__feature-wrapper">
-              <AiFillCheckCircle className="home__check-icon" />
-              <p className="home__feature">Reach More People</p>
-            </div>
+            <Link to={user ? "/profile" : "/login"}>
+              <button className="home__button">Get Started Now</button>
+            </Link>
           </div>
-          <div className="home__illustrations">
-            <div className="home__illustrations-card"></div>
-          </div>
-          <button className="home__button">Get Started Now</button>
+
           <img src={img} alt="iphone image" className="home__img" />
         </div>
       </section>
@@ -65,7 +82,9 @@ const HomePage = () => {
                 digital portfolio for yourself which you can then share with
                 recruiters and other people.
               </p>
-              <button className="main__content-card__button">Explore</button>
+              <Link to={user ? "/profile" : "/login"}>
+                <button className="main__content-card__button">Explore</button>
+              </Link>
             </div>
           </div>
           <div className="main__content-card">
@@ -78,7 +97,9 @@ const HomePage = () => {
                 the option to connect your profile to cards, bracelets,
                 stickers, or rings. You can then simply tap away!
               </p>
-              <button className="main__content-card__button">Explore</button>
+              <Link to={user ? "/profile" : "/login"}>
+                <button className="main__content-card__button">Explore</button>
+              </Link>
             </div>
             <img
               src={illustration_one}
@@ -102,7 +123,9 @@ const HomePage = () => {
                 in smartphones. Simply tap your card to the back of phones and
                 your profile can be shared with others!
               </p>
-              <button className="main__content-card__button">Explore</button>
+              <Link to={user ? "/profile" : "/login"}>
+                <button className="main__content-card__button">Explore</button>
+              </Link>
             </div>
           </div>
         </div>
@@ -116,13 +139,15 @@ const HomePage = () => {
             Keegly's features were tailor-made to help you meet more people in
             less time.
           </p>
-          <button className="feature__button">Explore</button>
+          <Link to={user ? "/profile" : "/login"}>
+            <button className="feature__button">Explore</button>
+          </Link>
         </div>
 
         <div className="feature__container">
           <div className="feature__card">
             <div className="feature__icon">
-              <CiCircleCheck size={35} />
+              <AiOutlineCheckCircle size={30} />
             </div>
             <h1 className="feature__header">
               Free, <span>Forever</span>
@@ -134,7 +159,7 @@ const HomePage = () => {
           </div>
           <div className="feature__card">
             <div className="feature__icon">
-              <CiCircleCheck size={35} />
+              <AiOutlineCheckCircle size={30} />
             </div>
             <h1 className="feature__header">
               <span>Compatible</span>
@@ -146,7 +171,7 @@ const HomePage = () => {
           </div>
           <div className="feature__card">
             <div className="feature__icon">
-              <CiCircleCheck size={35} />
+              <AiOutlineCheckCircle size={30} />
             </div>
             <h1 className="feature__header">
               <span>Unlimited</span> Sharing
@@ -158,7 +183,7 @@ const HomePage = () => {
           </div>
           <div className="feature__card">
             <div className="feature__icon">
-              <CiCircleCheck size={35} />
+              <AiOutlineCheckCircle size={30} />
             </div>
             <h1 className="feature__header">
               <span>Convenient</span>
