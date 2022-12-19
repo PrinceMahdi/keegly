@@ -83,6 +83,7 @@ Install with npm
 ```bash
   cd keegly
   npm install
+  npm run dev
 ```
    
 ## Environment Variables
